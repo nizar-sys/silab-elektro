@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Console\PermissionController;
 use App\Http\Controllers\Console\RoleController;
+use App\Http\Controllers\Console\SubjectController;
 use App\Http\Controllers\Console\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
@@ -36,4 +37,6 @@ Route::prefix('console')->middleware(['auth', 'verified'])->group(function () {
     Route::resource('roles', RoleController::class);
     Route::patch('/users/profile/{id}', [UserController::class, 'updateDetail'])->name('users.profile.update');
     Route::resource('users', UserController::class);
+
+    Route::resource('subjects', SubjectController::class);
 });

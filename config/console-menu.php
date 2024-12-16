@@ -32,6 +32,18 @@ $menuItems = [
         ]
     ],
     [
+        'header' => 'Master Data',
+        'items' => [
+            [
+                'title' => 'Mata Kuliah',
+                'icon' => 'ri-book-2-line',
+                'route' => 'subjects.index',
+                'active' => 'subjects.*',
+                'submenu' => []
+            ],
+        ]
+    ],
+    [
         'header' => 'Pengaturan',
         'items' => [
             [
