@@ -56,6 +56,18 @@ $menuItems = [
         ]
     ],
     [
+        'header' => 'Manajemen Praktikum',
+        'items' => [
+            [
+                'title' => 'Data Jadwal',
+                'icon' => 'ri-calendar-todo-line',
+                'route' => 'schedules.index',
+                'active' => 'schedules.*',
+                'submenu' => [],
+            ],
+        ]
+    ],
+    [
         'header' => 'Pengaturan',
         'items' => [
             [
