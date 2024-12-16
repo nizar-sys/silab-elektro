@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Console\PermissionController;
 use App\Http\Controllers\Console\RoleController;
+use App\Http\Controllers\Console\RoomController;
 use App\Http\Controllers\Console\SubjectController;
 use App\Http\Controllers\Console\UserController;
 use App\Http\Controllers\DashboardController;
@@ -39,4 +40,5 @@ Route::prefix('console')->middleware(['auth', 'verified'])->group(function () {
     Route::resource('users', UserController::class);
 
     Route::resource('subjects', SubjectController::class);
+    Route::resource('rooms', RoomController::class);
 });

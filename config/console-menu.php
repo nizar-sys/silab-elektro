@@ -44,6 +44,18 @@ $menuItems = [
         ]
     ],
     [
+        'header' => 'Manajemen Ruangan',
+        'items' => [
+            [
+                'title' => 'Data Ruangan',
+                'icon' => 'ri-building-2-line',
+                'route' => 'rooms.index',
+                'active' => 'rooms.*',
+                'submenu' => []
+            ],
+        ]
+    ],
+    [
         'header' => 'Pengaturan',
         'items' => [
             [
