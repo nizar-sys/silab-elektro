@@ -79,6 +79,13 @@ $menuItems = [
                 'active' => 'schedules.*',
                 'submenu' => [],
             ],
+            [
+                'title' => 'Data Praktikum',
+                'icon' => 'ri-book-3-line',
+                'route' => 'practicals.index',
+                'active' => 'practicals.*',
+                'submenu' => [],
+            ]
         ]
     ],
     [

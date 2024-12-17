@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Console\InventoryController;
 use App\Http\Controllers\Console\PermissionController;
+use App\Http\Controllers\Console\PracticalController;
 use App\Http\Controllers\Console\RoleController;
 use App\Http\Controllers\Console\RoomController;
 use App\Http\Controllers\Console\ScheduleController;
@@ -48,4 +49,5 @@ Route::prefix('console')->middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('inventories', InventoryController::class);
     Route::resource('students', StudentController::class);
+    Route::resource('practicals', PracticalController::class);
 });
