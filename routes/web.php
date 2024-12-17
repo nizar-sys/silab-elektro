@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Console\InventoryController;
 use App\Http\Controllers\Console\PermissionController;
 use App\Http\Controllers\Console\RoleController;
 use App\Http\Controllers\Console\RoomController;
@@ -43,4 +44,6 @@ Route::prefix('console')->middleware(['auth', 'verified'])->group(function () {
     Route::resource('subjects', SubjectController::class);
     Route::resource('rooms', RoomController::class);
     Route::resource('schedules', ScheduleController::class);
+
+    Route::resource('inventories', InventoryController::class);
 });

@@ -53,6 +53,13 @@ $menuItems = [
                 'active' => 'rooms.*',
                 'submenu' => []
             ],
+            [
+                'title' => 'Data Inventaris',
+                'icon' => 'ri-archive-line',
+                'route' => 'inventories.index',
+                'active' => 'inventories.*',
+                'submenu' => [],
+            ],
         ]
     ],
     [

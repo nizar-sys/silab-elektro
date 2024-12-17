@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $adminUser = User::create([
+        User::create([
             'name' => 'Administrator',
             'email' => 'admin@mail.com',
             'password' => bcrypt('password'),
@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             SubjectSeeder::class,
             RoomSeeder::class,
             ScheduleSeeder::class,
+            InventorySeeder::class,
         ]);
     }
 }

@@ -10,4 +10,9 @@ class Room extends Model
     use HasFactory;
 
     protected $fillable = ['code', 'name'];
+
+    public function inventories()
+    {
+        return $this->hasMany(Inventory::class);
+    }
 }
