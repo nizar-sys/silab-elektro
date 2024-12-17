@@ -41,6 +41,13 @@ $menuItems = [
                 'active' => 'subjects.*',
                 'submenu' => []
             ],
+            [
+                'title' => 'Siswa',
+                'icon' => 'ri-user-3-line',
+                'route' => 'students.index',
+                'active' => 'students.*',
+                'submenu' => []
+            ]
         ]
     ],
     [
