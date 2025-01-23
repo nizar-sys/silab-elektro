@@ -16,14 +16,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
+        $user = User::create([
             'name' => 'Administrator',
             'email' => 'admin@mail.com',
             'password' => bcrypt('password'),
             'email_verified_at' => now(),
         ]);
 
+        $role = Role::create(['name' => 'admin']);
+        $user->assignRole($role);
+
         $this->call([
+            RoleSeeder::class,
             SubjectSeeder::class,
             RoomSeeder::class,
             ScheduleSeeder::class,

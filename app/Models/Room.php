@@ -9,7 +9,12 @@ class Room extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['code', 'name'];
+    protected $fillable = [
+        'code',
+        'name',
+        'link_stream',
+        'foto',
+    ];
 
     public function inventories()
     {

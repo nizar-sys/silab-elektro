@@ -22,7 +22,10 @@ class RoomController extends Controller
     {
         DB::beginTransaction();
         try {
-            Room::create($request->validated());
+            $payload = $request->validated();
+            $payload['foto'] = handleUpload('foto');
+
+            Room::create($payload);
 
             DB::commit();
             return redirect()->route('rooms.index')->with('success', 'Penambahan ruangan berhasil.');
@@ -55,7 +58,13 @@ class RoomController extends Controller
         DB::beginTransaction();
         try {
             $room = Room::findOrFail($id);
-            $room->update($request->validated());
+            $payload = $request->validated();
+
+            if ($request->hasFile('foto')) {
+                $payload['foto'] = handleUpload('foto', 'uploads', $room->foto);
+            }
+
+            $room->update($payload);
 
             DB::commit();
             return redirect()->route('rooms.index')->with('success', 'ruangan berhasil diperbarui.');
@@ -71,7 +80,9 @@ class RoomController extends Controller
     {
         DB::beginTransaction();
         try {
-            Room::findOrFail($id)->delete();
+            $room = Room::findOrFail($id);
+            deleteFileIfExist($room->foto);
+            $room->delete();
 
             DB::commit();
             return redirect()->route('rooms.index')->with('success', 'ruangan berhasil dihapus.');

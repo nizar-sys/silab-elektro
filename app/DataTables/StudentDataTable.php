@@ -54,18 +54,18 @@ class StudentDataTable extends DataTable
         $language = [
             'sLengthMenu' => 'Tampil _MENU_',
             'search' => '',
-            'searchPlaceholder' => 'Cari Siswa...',
+            'searchPlaceholder' => 'Cari Mahasiswa...',
             'paginate' => [
                 'next' => '<i class="ri-arrow-right-s-line"></i>',
                 'previous' => '<i class="ri-arrow-left-s-line"></i>'
             ],
-            'info' => 'Menampilkan _START_ ke _END_ dari _TOTAL_ Siswa',
+            'info' => 'Menampilkan _START_ ke _END_ dari _TOTAL_ Mahasiswa',
         ];
 
         // Konfigurasi tombol
         $buttons = [
             [
-                'text' => '<i class="ri-add-line me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Tambah Siswa</span>',
+                'text' => '<i class="ri-add-line me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Tambah Mahasiswa</span>',
                 'className' => 'add-new btn btn-primary mb-5 mb-md-0 me-3 waves-effect waves-light',
                 'attr' => [
                     'data-bs-toggle' => 'offcanvas',

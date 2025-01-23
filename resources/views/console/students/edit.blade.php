@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Edit Siswa')
+@section('title', 'Edit Mahasiswa')
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -7,7 +7,7 @@
 
             <div class="card-header border-bottom">
                 <h5 class="card-title mb-0">
-                    <span class="fw-normal">Edit Siswa</span>
+                    <span class="fw-normal">Edit Mahasiswa</span>
                 </h5>
             </div>
 
@@ -42,9 +42,9 @@
                                 class="form-control @error('nim')
                                 is-invalid
                             @enderror"
-                                id="edit-user-nim" placeholder="Masukkan NIM Siswa..." name="nim"
-                                aria-label="Masukkan NIM Siswa..." value="{{ old('nim', $student->nim) }}" />
-                            <label for="edit-user-nim">NIM Siswa</label>
+                                id="edit-user-nim" placeholder="Masukkan NIM Mahasiswa..." name="nim"
+                                aria-label="Masukkan NIM Mahasiswa..." value="{{ old('nim', $student->nim) }}" />
+                            <label for="edit-user-nim">NIM Mahasiswa</label>
 
                             @error('nim')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -56,9 +56,9 @@
                                 class="form-control @error('name')
                                 is-invalid
                             @enderror"
-                                id="edit-user-name" placeholder="Masukkan Nama Siswa..." name="name"
-                                aria-label="Masukkan Nama Siswa..." value="{{ old('name', $student->user->name) }}" />
-                            <label for="edit-user-name">Nama Siswa</label>
+                                id="edit-user-name" placeholder="Masukkan Nama Mahasiswa..." name="name"
+                                aria-label="Masukkan Nama Mahasiswa..." value="{{ old('name', $student->user->name) }}" />
+                            <label for="edit-user-name">Nama Mahasiswa</label>
 
                             @error('name')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -70,9 +70,9 @@
                                 class="form-control @error('email')
                                 is-invalid
                             @enderror"
-                                id="edit-user-email" placeholder="Masukkan Email Siswa..." name="email"
-                                aria-label="Masukkan Email Siswa..." value="{{ old('email', $student->user->email) }}" />
-                            <label for="edit-user-email">Email Siswa</label>
+                                id="edit-user-email" placeholder="Masukkan Email Mahasiswa..." name="email"
+                                aria-label="Masukkan Email Mahasiswa..." value="{{ old('email', $student->user->email) }}" />
+                            <label for="edit-user-email">Email Mahasiswa</label>
 
                             @error('email')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -84,9 +84,9 @@
                                 class="form-control @error('cohort')
                                 is-invalid
                             @enderror"
-                                id="edit-user-cohort" placeholder="Masukkan Angkatan Siswa..." name="cohort"
-                                aria-label="Masukkan Angkatan Siswa..." value="{{ old('cohort', $student->cohort) }}" />
-                            <label for="edit-user-cohort">Angkatan Siswa</label>
+                                id="edit-user-cohort" placeholder="Masukkan Angkatan Mahasiswa..." name="cohort"
+                                aria-label="Masukkan Angkatan Mahasiswa..." value="{{ old('cohort', $student->cohort) }}" />
+                            <label for="edit-user-cohort">Angkatan Mahasiswa</label>
 
                             @error('cohort')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -98,9 +98,9 @@
                                 class="form-control @error('password')
                                 is-invalid
                             @enderror"
-                                id="edit-user-password" placeholder="Masukkan Kata Sandi Siswa..." name="password"
-                                aria-label="Masukkan Kata Sandi Siswa..." value="{{ old('password') }}" />
-                            <label for="edit-user-password">Kata Sandi Siswa</label>
+                                id="edit-user-password" placeholder="Masukkan Kata Sandi Mahasiswa..." name="password"
+                                aria-label="Masukkan Kata Sandi Mahasiswa..." value="{{ old('password') }}" />
+                            <label for="edit-user-password">Kata Sandi Mahasiswa</label>
 
                             @error('password')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -112,9 +112,9 @@
                                 class="form-control @error('password_confirmation')
                                 is-invalid
                             @enderror"
-                                id="edit-user-password_confirmation" placeholder="Masukkan Konfirmasi Kata Sandi Siswa..." name="password_confirmation" aria-label="Masukkan Konfirmasi Kata Sandi Siswa..."
+                                id="edit-user-password_confirmation" placeholder="Masukkan Konfirmasi Kata Sandi Mahasiswa..." name="password_confirmation" aria-label="Masukkan Konfirmasi Kata Sandi Mahasiswa..."
                                 value="{{ old('password_confirmation') }}" />
-                            <label for="edit-user-password_confirmation">Konfirmasi Kata Sandi Siswa</label>
+                            <label for="edit-user-password_confirmation">Konfirmasi Kata Sandi Mahasiswa</label>
 
                             @error('password_confirmation')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>

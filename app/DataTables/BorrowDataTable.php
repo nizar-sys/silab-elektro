@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\Room;
+use App\Models\Borrow;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class RoomDataTable extends DataTable
+class BorrowDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -23,40 +23,36 @@ class RoomDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('action', 'console.rooms.action')
-            ->editColumn('foto', function ($data) {
-                if ($data->foto) {
-                    $imageUrl = str_replace('public/', 'storage/', $data->foto);
-                    return '
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#logoModal' . $data->id . '">
-                            <img src="' . asset($imageUrl) . '" style="width:50px; height:50px; border-radius:50%; object-fit:cover;" alt="Image"/>
-                        </a>
-                        <div class="modal fade" id="logoModal' . $data->id . '" tabindex="-1" aria-labelledby="logoModalLabel' . $data->id . '" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="logoModalLabel' . $data->id . '">' . $data->name . '</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body text-center">
-                                        <img src="' . asset($imageUrl) . '" style="width:100%; height:auto; object-fit:cover;" alt="Logo"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    ';
+            ->addColumn('action', 'console.borrows.action')
+            ->editColumn('status', function ($borrow) {
+                // gunakan switch case untuk mengubah status menjadi label
+                switch ($borrow->status) {
+                    case 'pending':
+                        return '<span class="badge bg-warning">Pending</span>';
+                        break;
+                    case 'borrowed':
+                        return '<span class="badge bg-success">Disetujui</span>';
+                        break;
+                    case 'rejected':
+                        return '<span class="badge bg-danger">Ditolak</span>';
+                        break;
+                    case 'returned':
+                        return '<span class="badge bg-info">Dikembalikan</span>';
+                        break;
+                    default:
+                        return '<span class="badge bg-secondary">Tidak diketahui</span>';
+                        break;
                 }
-                return '-';
             })
-            ->rawColumns(['action', 'foto']);
+            ->rawColumns(['action', 'status']);
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(Room $model): QueryBuilder
+    public function query(Borrow $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()->with('inventory', 'student.user');
     }
 
     /**
@@ -78,18 +74,18 @@ class RoomDataTable extends DataTable
         $language = [
             'sLengthMenu' => 'Tampil _MENU_',
             'search' => '',
-            'searchPlaceholder' => 'Cari Ruangan...',
+            'searchPlaceholder' => 'Cari Peminjaman...',
             'paginate' => [
                 'next' => '<i class="ri-arrow-right-s-line"></i>',
                 'previous' => '<i class="ri-arrow-left-s-line"></i>'
             ],
-            'info' => 'Menampilkan _START_ ke _END_ dari _TOTAL_ Ruangan',
+            'info' => 'Menampilkan _START_ ke _END_ dari _TOTAL_ Peminjaman',
         ];
 
         // Konfigurasi tombol
         $buttons = [
             [
-                'text' => '<i class="ri-add-line me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Tambah Ruangan</span>',
+                'text' => '<i class="ri-add-line me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Tambah Peminjaman</span>',
                 'className' => 'add-new btn btn-primary mb-5 mb-md-0 me-3 waves-effect waves-light',
                 'attr' => [
                     'data-bs-toggle' => 'offcanvas',
@@ -104,13 +100,13 @@ class RoomDataTable extends DataTable
                 'className' => 'btn btn-secondary mb-5 mb-md-0 waves-effect waves-light',
                 'action' => 'function (e, dt, node, config) {
                     dt.ajax.reload();
-                    $("#rooms-table_filter input").val("").keyup();
+                    $("#borrows-table_filter input").val("").keyup();
                 }'
             ]
         ];
 
         return $this->builder()
-            ->setTableId('rooms-table')
+            ->setTableId('borrows-table')
             ->columns($this->getColumns())
             ->parameters([
                 'order' => [[0, 'desc']], // Urutan default
@@ -121,7 +117,7 @@ class RoomDataTable extends DataTable
                 'autoWidth' => false, // AutoWidth
             ])
             ->ajax([
-                'url'  => route('rooms.index'),
+                'url'  => route('borrows.index'),
                 'type' => 'GET',
             ]);
     }
@@ -133,10 +129,12 @@ class RoomDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('#')->orderable(false)->searchable(false),
-            Column::make('code')->title('Kode Ruangan'),
-            Column::make('name')->title('Nama Ruangan'),
-            Column::make('link_stream')->title('Link Stream'),
-            Column::make('foto')->title('Foto')->orderable(false)->searchable(false),
+            Column::make('inventory.name')->title('Nama Barang'),
+            Column::make('student.user.name')->title('Peminjam'),
+            Column::make('borrow_date')->title('Tanggal Pinjam'),
+            Column::make('return_date')->title('Tanggal Kembali'),
+            Column::make('returned_date')->title('Tanggal Dikembalikan'),
+            Column::make('status')->title('Status'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
@@ -151,6 +149,6 @@ class RoomDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Room_' . date('YmdHis');
+        return 'Borrow_' . date('YmdHis');
     }
 }

@@ -43,24 +43,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Form validation configuration
     validateForm("#addNewUserForm", {
-        name: {
+        student_id: {
             validators: {
                 notEmpty: {
-                    message: "Nama Ruangan wajib diisi",
+                    message: "Pilih Mahasiswa",
                 },
             },
         },
-        code: {
+        inventory_id: {
             validators: {
                 notEmpty: {
-                    message: "Kode Ruangan wajib diisi",
-                },
-            },
-        },
-        link_stream: {
-            validators: {
-                notEmpty: {
-                    message: "Link Stream wajib diisi",
+                    message: "Pilih Barang",
                 },
             },
         },

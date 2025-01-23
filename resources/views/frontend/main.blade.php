@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@yield('title')</title>
+    <title>{{ config('app.name') }} | @yield('title')</title>
     <link rel="stylesheet" href="{{ asset('/fe') }}/css/utils.css" />
     <link rel="stylesheet" href="{{ asset('/fe') }}/css/main.css" />
     <link rel="stylesheet" href="{{ asset('/fe') }}/css/jumbotron.css" />
@@ -17,6 +17,10 @@
 
     <!-- icon -->
     <link rel="icon" href="{{ asset('/fe') }}/images/icon.jpeg" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    @stack('styles')
 </head>
 
 <body>
@@ -70,14 +74,32 @@
                                 <li><a href="#">Praktikum</a></li>
                             </ul>
                         </li>
-                        <li>
-                            <a href="#">Login</a>
-                            <i class="bx bxs-chevron-down htmlcss-arrow arrow"></i>
-                            <ul class="htmlCss-sub-menu sub-menu">
-                                <li><a href="#">Login</a></li>
-                                <li><a href="#">Registrasi</a></li>
-                            </ul>
-                        </li>
+                        @if (Auth::check())
+                            <li>
+                                <a href="#">{{ Auth::user()->name }}</a>
+                                <i class="bx bxs-chevron-down htmlcss-arrow arrow"></i>
+                                <ul class="htmlCss-sub-menu sub-menu">
+                                    @if (Auth::user()->hasRole('mahasiswa'))
+                                        <li><a href="{{ route('profile.edit') }}">Peminjaman</a></li>
+                                    @endif
+                                    <li>
+                                        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @else
+                            <li>
+                                <a href="#">Login</a>
+                                <i class="bx bxs-chevron-down htmlcss-arrow arrow"></i>
+                                <ul class="htmlCss-sub-menu sub-menu">
+                                    <li><a href="{{ route('login') }}">Login</a></li>
+                                    <li><a href="{{ route('register') }}">Registrasi</a></li>
+                                </ul>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -85,384 +107,7 @@
     </header>
 
     <main>
-        <section class="hero-slider hero-style">
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="slide-inner slide-bg-image" data-background="{{ asset('/fe') }}/images/slider/bg1.jpg">
-                            <div class="container">
-                                <div data-swiper-parallax="300" class="slide-title">
-                                    <h2 class="whitefont">
-                                        Sistem Praktikum Jurusan Pendidikan Teknik Elektro
-                                    </h2>
-                                </div>
-                                <div data-swiper-parallax="400" class="slide-text">
-                                    <p class="whitefont">
-                                        Dapatkan informasi mengenai kegiatan praktikum yang
-                                        diselenggarakan program studi Sistem Praktikum Jurusan
-                                        Pendidikan Teknik Elektro
-                                    </p>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div data-swiper-parallax="500" class="slide-btns">
-                                    <a href="#" class="theme-btn-s2">Menuju Halaman</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end slide-inner -->
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="slide-inner slide-bg-image" data-background="{{ asset('/fe') }}/images/slider/bg2.jpg">
-                            <div class="container">
-                                <div data-swiper-parallax="300" class="slide-title">
-                                    <h2 class="whitefont">
-                                        Monitoring Laboratoum Sistem praktikum jurusan pendidikan Teknik Elektro
-                                    </h2>
-                                </div>
-                                <div data-swiper-parallax="400" class="slide-text">
-                                    <p class="whitefont">
-                                        Lihat keadaan Laboratorium secara langsung melalui video streaming
-                                    </p>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div data-swiper-parallax="500" class="slide-btns">
-                                    <a href="#" class="theme-btn-s2">Menuju Halaman</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end slide-inner -->
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="slide-inner slide-bg-image" data-background="{{ asset('/fe') }}/images/slider/bg3.jpg">
-                            <div class="container">
-                                <div data-swiper-parallax="300" class="slide-title">
-                                    <h2 class="whitefont">
-                                        Absensi Sistem praktikum jurusan pendidikan Teknik Elektro
-                                    </h2>
-                                </div>
-                                <div data-swiper-parallax="400" class="slide-text">
-                                    <p class="whitefont">
-                                        Cek kehadiran praktikum yang sedang atau yang telah dilaksanakan
-                                    </p>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div data-swiper-parallax="500" class="slide-btns">
-                                    <a href="#" class="theme-btn-s2">Menuju Halaman</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end slide-inner -->
-                    </div>
-                </div>
-
-                <div class="swiper-pagination"></div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-            </div>
-        </section>
-
-        <section class="section-services">
-            <div class="container">
-                <div class="row justify-content-center text-center">
-                    <div class="col-md-10 col-lg-8">
-                        <div class="header-section">
-                            <h2 class="title">Fitur</h2>
-                            <p class="description">
-                                Berikut beberapa fitur yang dapat diakses melalui website Laboratorium Sistem praktikum
-                                jurusan pendidikan Teknik Elektro
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <!-- Single Service -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="single-service">
-                            <div class="content">
-                                <span class="icon">
-                                    <i class="fa fa-bullhorn"></i>
-                                </span>
-                                <h3 class="title">Info Praktikum</h3>
-                                <p class="description">Informasi mengenai peserta praktikum,absensi, nilai, dll.</p>
-                            </div>
-                            <span class="circle-before"></span>
-                        </div>
-                    </div>
-                    <!-- / End Single Service -->
-                    <!-- Single Service -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="single-service">
-                            <div class="content">
-                                <span class="icon">
-                                    <i class="fa fa-comments"></i>
-                                </span>
-                                <h3 class="title">Topik TA</h3>
-                                <p class="description">Informasi judul TA yang dapat dijadikan referensi</p>
-
-                            </div>
-                            <span class="circle-before"></span>
-                        </div>
-                    </div>
-                    <!-- / End Single Service -->
-                    <!-- Single Service -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="single-service">
-                            <div class="content">
-                                <span class="icon">
-                                    <i class="fab fa-artstation"></i>
-                                </span>
-                                <h3 class="title">Arsip & Dokumentasi</h3>
-                                <p class="description">Download file yang berkaitan dengan laboratorium dan praktikum
-                                </p>
-
-                            </div>
-                            <span class="circle-before"></span>
-                        </div>
-                    </div>
-                    <!-- / End Single Service -->
-                    <!-- Single Service -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="single-service">
-                            <div class="content">
-                                <span class="icon">
-                                    <i class="fa fa-leaf"></i>
-                                </span>
-                                <h3 class="title">Inventaris</h3>
-                                <p class="description">Melihat data invertaris laboratorium</p>
-
-                            </div>
-                            <span class="circle-before"></span>
-                        </div>
-                    </div>
-                    <!-- / End Single Service -->
-                    <!-- Single Service -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="single-service">
-                            <div class="content">
-                                <span class="icon">
-                                    <i class="fa fa-cogs"></i>
-                                </span>
-                                <h3 class="title">Peminjaman Alat</h3>
-                                <p class="description">Melakukan peminjaman peralatan laboratorium</p>
-
-                            </div>
-                            <span class="circle-before"></span>
-                        </div>
-                    </div>
-                    <!-- / End Single Service -->
-                    <!-- Single Service -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="single-service">
-                            <div class="content">
-                                <span class="icon">
-                                    <i class="fa fa-heart"></i>
-                                </span>
-                                <h3 class="title">Dan Lain-lain</h3>
-                                <p class="description">Masih ada fitur lain yang dapat diakses</p>
-
-                            </div>
-                            <span class="circle-before"></span>
-                        </div>
-                    </div>
-                    <!-- / End Single Service -->
-                </div>
-            </div>
-        </section>
-
-        <section class="section-services bg-white">
-            <div class="container">
-                <div class="row justify-content-center text-center">
-                    <div class="col-md-10 col-lg-8">
-                        <div class="header-section">
-                            <h2 class="title">Monitoring</h2>
-                            <p class="description">
-                                Menampilkan secara langsung keadaan ruangan Laboratorium Sistem praktikum jurusan
-                                pendidikan Teknik Elektro
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="d-flex flex-wrap justify-content-center gap-3">
-                    <div class="single-service">
-                        <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" class="embed-responsive-item"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <div class="single-service">
-                        <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" class="embed-responsive-item"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <div class="single-service">
-                        <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" class="embed-responsive-item"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <div class="single-service">
-                        <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" class="embed-responsive-item"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <div class="single-service">
-                        <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" class="embed-responsive-item"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section-services">
-            <div class="container">
-                <div class="row justify-content-center text-center">
-                    <div class="col-md-10 col-lg-8">
-                        <div class="header-section">
-                            <h2 class="title">Praktikum</h2>
-                            <p class="description">
-                                Informasi kegiatan Sistem praktikum jurusan pendidikan Teknik Elektro
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <!-- Single Service -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="single-service">
-                            <div class="content">
-                                <span class="icon" style="background-color: transparent;">
-                                    <img class="img-responsive" src="{{ asset('/fe') }}/images/services/services1.png">
-                                </span>
-                                <h3 class="title">PEMDAS</h3>
-                                <p class="description">Pemrograman Dasar</p>
-
-                            </div>
-                            <span class="circle-before"></span>
-                        </div>
-                    </div>
-                    <!-- / End Single Service -->
-                    <!-- Single Service -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="single-service">
-                            <div class="content">
-                                <span class="icon" style="background-color: transparent;">
-                                    <img class="img-responsive" src="{{ asset('/fe') }}/images/services/services2.png">
-                                </span>
-                                <h3 class="title">ORKOM</h3>
-                                <p class="description">Organisasi & Arsitektur Komputer</p>
-
-                            </div>
-                            <span class="circle-before"></span>
-                        </div>
-                    </div>
-                    <!-- / End Single Service -->
-                    <!-- Single Service -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="single-service">
-                            <div class="content">
-                                <span class="icon" style="background-color: transparent;">
-                                    <img class="img-responsive" src="{{ asset('/fe') }}/images/services/services3.png">
-                                </span>
-                                <h3 class="title">PRC</h3>
-                                <p class="description">Pemrograman Robot Cerdas</p>
-
-                            </div>
-                            <span class="circle-before"></span>
-                        </div>
-                    </div>
-                    <!-- / End Single Service -->
-                    <!-- Single Service -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="single-service">
-                            <div class="content">
-                                <span class="icon" style="background-color: transparent;">
-                                    <img class="img-responsive" src="{{ asset('/fe') }}/images/services/services4.png">
-                                </span>
-                                <h3 class="title">JARKOM</h3>
-                                <p class="description">Jaringan Komputer</p>
-
-                            </div>
-                            <span class="circle-before"></span>
-                        </div>
-                    </div>
-                    <!-- / End Single Service -->
-                    <!-- Single Service -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="single-service">
-                            <div class="content">
-                                <span class="icon" style="background-color: transparent;">
-                                    <img class="img-responsive" src="{{ asset('/fe') }}/images/services/services5.png">
-                                </span>
-                                <h3 class="title">REKWEB</h3>
-                                <p class="description">Rekayasa Web</p>
-
-                            </div>
-                            <span class="circle-before"></span>
-                        </div>
-                    </div>
-                    <!-- / End Single Service -->
-                    <!-- Single Service -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="single-service">
-                            <div class="content">
-                                <span class="icon" style="background-color: transparent;">
-                                    <img class="img-responsive" src="{{ asset('/fe') }}/images/services/services6.png">
-                                </span>
-                                <h3 class="title">JST</h3>
-                                <p class="description">Jaringan Syaraf Tiruan</p>
-
-                            </div>
-                            <span class="circle-before"></span>
-                        </div>
-                    </div>
-                    <!-- / End Single Service -->
-                    <!-- Single Service -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="single-service">
-                            <div class="content">
-                                <span class="icon" style="background-color: transparent;">
-                                    <img class="img-responsive" src="{{ asset('/fe') }}/images/services/services7.png">
-                                </span>
-                                <h3 class="title">BASDAT</h3>
-                                <p class="description">Basis Data</p>
-
-                            </div>
-                            <span class="circle-before"></span>
-                        </div>
-                    </div>
-                    <!-- / End Single Service -->
-                    <!-- Single Service -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="single-service">
-                            <div class="content">
-                                <span class="icon" style="background-color: transparent;">
-                                    <img class="img-responsive" src="{{ asset('/fe') }}/images/services/services8.png">
-                                </span>
-                                <h3 class="title">PBD</h3>
-                                <p class="description">Pemrograman Basis Data</p>
-
-                            </div>
-                            <span class="circle-before"></span>
-                        </div>
-                    </div>
-                    <!-- / End Single Service -->
-                    <!-- Single Service -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="single-service">
-                            <div class="content">
-                                <span class="icon" style="background-color: transparent;">
-                                    <img class="img-responsive" src="{{ asset('/fe') }}/images/services/services9.png">
-                                </span>
-                                <h3 class="title">PBO</h3>
-                                <p class="description">Pemrograman Berorientasi Objek</p>
-
-                            </div>
-                            <span class="circle-before"></span>
-                        </div>
-                    </div>
-                    <!-- / End Single Service -->
-                </div>
-            </div>
-        </section>
+        @yield('content')
     </main>
 
     <footer class="bg-dark text-white py-3">
@@ -496,10 +141,18 @@
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
     <script src="{{ asset('/fe') }}/js/main.js"></script>
     <script src="{{ asset('/fe') }}/js/jumbotron.js"></script>
+    @stack('scripts')
 </body>
 
 </html>

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Data Ruangan')
+@section('title', 'Data Nilai Praktikum')
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -26,38 +26,35 @@
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAddUser"
                 aria-labelledby="offcanvasAddUserLabel">
                 <div class="offcanvas-header border-bottom">
-                    <h5 id="offcanvasAddUserLabel" class="offcanvas-title">Tambah Ruangan</h5>
+                    <h5 id="offcanvasAddUserLabel" class="offcanvas-title">Tambah Nilai Praktikum</h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
 
                 <div class="offcanvas-body mx-0 flex-grow-0 h-100">
                     <form class="add-new-user pt-0" id="addNewUserForm" method="POST" onsubmit="return false"
-                        action="{{ route('rooms.store') }}" enctype="multipart/form-data">
+                        action="{{ route('practical-values.store') }}">
                         @csrf
 
                         <div class="form-floating form-floating-outline mb-5">
-                            <input type="text" class="form-control" id="add-code" placeholder="Masukkan Kode Ruangan..."
-                                name="code" aria-label="Masukkan Kode Ruangan..." />
-                            <label for="add-code">Kode</label>
+                            <select id="practical-id" class="form-select @error('practical_id')
+                                is-invalid @enderror" name="practical_id">
+                                <option value="">Pilih Praktikum</option>
+                                @foreach ($practicals as $practical)
+                                    <option value="{{ $practical->id }}">{{ $practical->name }}</option>
+                                @endforeach
+                            </select>
+                            <label for="practical-id">Praktikum</label>
+
+                            @error('practical_id')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-floating form-floating-outline mb-5">
-                            <input type="text" class="form-control" id="add-name" placeholder="Masukkan Nama Ruangan..."
-                                name="name" aria-label="Masukkan Nama Ruangan..." />
-                            <label for="add-name">Nama</label>
-                        </div>
-
-                        <div class="form-floating form-floating-outline mb-5">
-                            <input type="url" class="form-control" id="add-link_stream" placeholder="Masukkan Link Streaming Ruangan..."
-                                name="link_stream" aria-label="Masukkan Link Streaming Ruangan..." />
-                            <label for="add-link_stream">Link Streaming</label>
-                        </div>
-
-                        <div class="form-floating form-floating-outline mb-5">
-                            <input type="file" class="form-control" id="add-foto" placeholder="Masukkan Foto Ruangan..."
-                                name="foto" aria-label="Masukkan Foto Ruangan..." />
-                            <label for="add-foto">Foto Ruangan</label>
+                            <input type="text" class="form-control" id="add-value" placeholder="Masukkan Nilai Praktikum..."
+                                name="value" aria-label="Masukkan Nilai Praktikum..." />
+                            <label for="add-value">Nilai</label>
                         </div>
 
                         <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Simpan</button>
@@ -74,7 +71,7 @@
     {{ $dataTable->scripts() }}
 
     <script>
-        var urlDeleteUser = "{{ route('rooms.destroy', ':id') }}";
+        var urlDeleteUser = "{{ route('practical-values.destroy', ':id') }}";
     </script>
-    @vite('resources/js/console/rooms/script.js')
+    @vite('resources/js/console/practical_values/script.js')
 @endpush

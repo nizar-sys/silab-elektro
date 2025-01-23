@@ -24,4 +24,9 @@ class Student extends Model
     {
         return $this->hasMany(Practical::class);
     }
+
+    public function borrows()
+    {
+        return $this->hasMany(Borrow::class);
+    }
 }

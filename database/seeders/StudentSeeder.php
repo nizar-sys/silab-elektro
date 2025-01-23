@@ -14,9 +14,14 @@ class StudentSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()
+        $users = User::factory()
             ->count(10)
             ->hasStudent(1) // Menghubungkan User dengan 1 Student
             ->create();
+
+        $role = \Spatie\Permission\Models\Role::where('name', 'mahasiswa')->first();
+        foreach ($users as $user) {
+            $user->assignRole($role);
+        }
     }
 }

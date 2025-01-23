@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Data Ruangan')
+@section('title', 'Data Peminjaman')
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -26,38 +26,44 @@
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAddUser"
                 aria-labelledby="offcanvasAddUserLabel">
                 <div class="offcanvas-header border-bottom">
-                    <h5 id="offcanvasAddUserLabel" class="offcanvas-title">Tambah Ruangan</h5>
+                    <h5 id="offcanvasAddUserLabel" class="offcanvas-title">Tambah Peminjaman</h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
 
                 <div class="offcanvas-body mx-0 flex-grow-0 h-100">
                     <form class="add-new-user pt-0" id="addNewUserForm" method="POST" onsubmit="return false"
-                        action="{{ route('rooms.store') }}" enctype="multipart/form-data">
+                        action="{{ route('borrows.store') }}">
                         @csrf
 
                         <div class="form-floating form-floating-outline mb-5">
-                            <input type="text" class="form-control" id="add-code" placeholder="Masukkan Kode Ruangan..."
-                                name="code" aria-label="Masukkan Kode Ruangan..." />
-                            <label for="add-code">Kode</label>
+                            <select id="student-id" class="form-select @error('student_id')
+                                is-invalid @enderror" name="student_id">
+                                <option value="">Pilih Mahasiswa</option>
+                                @foreach ($students as $student)
+                                    <option value="{{ $student->id }}">{{ $student->user->name }}</option>
+                                @endforeach
+                            </select>
+                            <label for="student-id">Mahasiswa</label>
+
+                            @error('student_id')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-floating form-floating-outline mb-5">
-                            <input type="text" class="form-control" id="add-name" placeholder="Masukkan Nama Ruangan..."
-                                name="name" aria-label="Masukkan Nama Ruangan..." />
-                            <label for="add-name">Nama</label>
-                        </div>
+                            <select id="inventory-id" class="form-select @error('inventory_id')
+                                is-invalid @enderror" name="inventory_id">
+                                <option value="">Pilih Barang</option>
+                                @foreach ($inventories as $inventory)
+                                    <option value="{{ $inventory->id }}">{{ $inventory->name }}</option>
+                                @endforeach
+                            </select>
+                            <label for="inventory-id">Barang</label>
 
-                        <div class="form-floating form-floating-outline mb-5">
-                            <input type="url" class="form-control" id="add-link_stream" placeholder="Masukkan Link Streaming Ruangan..."
-                                name="link_stream" aria-label="Masukkan Link Streaming Ruangan..." />
-                            <label for="add-link_stream">Link Streaming</label>
-                        </div>
-
-                        <div class="form-floating form-floating-outline mb-5">
-                            <input type="file" class="form-control" id="add-foto" placeholder="Masukkan Foto Ruangan..."
-                                name="foto" aria-label="Masukkan Foto Ruangan..." />
-                            <label for="add-foto">Foto Ruangan</label>
+                            @error('inventory_id')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Simpan</button>
@@ -74,7 +80,7 @@
     {{ $dataTable->scripts() }}
 
     <script>
-        var urlDeleteUser = "{{ route('rooms.destroy', ':id') }}";
+        var urlDeleteUser = "{{ route('borrows.destroy', ':id') }}";
     </script>
-    @vite('resources/js/console/rooms/script.js')
+    @vite('resources/js/console/borrows/script.js')
 @endpush

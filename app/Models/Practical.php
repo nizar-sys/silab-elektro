@@ -31,4 +31,9 @@ class Practical extends Model
     {
         return $this->belongsTo(Student::class);
     }
+
+    public function practicalValues()
+    {
+        return $this->hasMany(PracticalValue::class);
+    }
 }

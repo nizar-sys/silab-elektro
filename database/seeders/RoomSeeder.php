@@ -14,11 +14,9 @@ class RoomSeeder extends Seeder
     public function run(): void
     {
         $rooms = [
-            ['code' => 'A1', 'name' => 'Room A1'],
-            ['code' => 'A2', 'name' => 'Room A2'],
-            ['code' => 'A3', 'name' => 'Room A3'],
-            ['code' => 'A4', 'name' => 'Room A4'],
-            ['code' => 'A5', 'name' => 'Room A5'],
+            ['code' => 'ML', 'name' => 'LAB Mesin Listrik', 'link_stream' => 'https://www.youtube.com/embed/tgbNymZ7vqY', 'foto' => 'uploads/mesin_listrik.jpeg'],
+            ['code' => 'IL', 'name' => 'LAB Installasi Listrik', 'link_stream' => 'https://www.youtube.com/embed/tgbNymZ7vqY', 'foto' => 'uploads/installasi_listrik.jpeg'],
+            ['code' => 'IP', 'name' => 'LAB Instrument dan Pengukuran', 'link_stream' => 'https://www.youtube.com/embed/tgbNymZ7vqY', 'foto' => 'uploads/instrumen_dan_pengukuran.jpeg'],
         ];
 
         Room::insert($rooms);

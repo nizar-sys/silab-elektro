@@ -27,6 +27,7 @@ class StudentController extends Controller
             $payload['password'] = bcrypt($payload['password']);
 
             $user = User::create($payload);
+            $user->assignRole('mahasiswa');
             $user->student()->create($payload);
 
             DB::commit();

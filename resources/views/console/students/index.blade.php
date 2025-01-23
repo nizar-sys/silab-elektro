@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Data Siswa')
+@section('title', 'Data Mahasiswa')
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -26,7 +26,7 @@
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAddUser"
                 aria-labelledby="offcanvasAddUserLabel">
                 <div class="offcanvas-header border-bottom">
-                    <h5 id="offcanvasAddUserLabel" class="offcanvas-title">Tambah Siswa</h5>
+                    <h5 id="offcanvasAddUserLabel" class="offcanvas-title">Tambah Mahasiswa</h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
@@ -41,9 +41,9 @@
                                 class="form-control @error('nim')
                                 is-invalid
                             @enderror"
-                                id="edit-user-nim" placeholder="Masukkan NIM Siswa..." name="nim" aria-label="Masukkan NIM Siswa..."
+                                id="edit-user-nim" placeholder="Masukkan NIM Mahasiswa..." name="nim" aria-label="Masukkan NIM Mahasiswa..."
                                 value="{{ old('nim') }}" />
-                            <label for="edit-user-nim">NIM Siswa</label>
+                            <label for="edit-user-nim">NIM Mahasiswa</label>
 
                             @error('nim')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -55,9 +55,9 @@
                                 class="form-control @error('name')
                                 is-invalid
                             @enderror"
-                                id="edit-user-name" placeholder="Masukkan Nama Siswa..." name="name" aria-label="Masukkan Nama Siswa..."
+                                id="edit-user-name" placeholder="Masukkan Nama Mahasiswa..." name="name" aria-label="Masukkan Nama Mahasiswa..."
                                 value="{{ old('name') }}" />
-                            <label for="edit-user-name">Nama Siswa</label>
+                            <label for="edit-user-name">Nama Mahasiswa</label>
 
                             @error('name')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -69,9 +69,9 @@
                                 class="form-control @error('email')
                                 is-invalid
                             @enderror"
-                                id="edit-user-email" placeholder="Masukkan Email Siswa..." name="email" aria-label="Masukkan Email Siswa..."
+                                id="edit-user-email" placeholder="Masukkan Email Mahasiswa..." name="email" aria-label="Masukkan Email Mahasiswa..."
                                 value="{{ old('email') }}" />
-                            <label for="edit-user-email">Email Siswa</label>
+                            <label for="edit-user-email">Email Mahasiswa</label>
 
                             @error('email')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -83,9 +83,9 @@
                                 class="form-control @error('cohort')
                                 is-invalid
                             @enderror"
-                                id="edit-user-cohort" placeholder="Masukkan Angkatan Siswa..." name="cohort" aria-label="Masukkan Angkatan Siswa..."
+                                id="edit-user-cohort" placeholder="Masukkan Angkatan Mahasiswa..." name="cohort" aria-label="Masukkan Angkatan Mahasiswa..."
                                 value="{{ old('cohort') }}" />
-                            <label for="edit-user-cohort">Angkatan Siswa</label>
+                            <label for="edit-user-cohort">Angkatan Mahasiswa</label>
 
                             @error('cohort')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -97,9 +97,9 @@
                                 class="form-control @error('password')
                                 is-invalid
                             @enderror"
-                                id="edit-user-password" placeholder="Masukkan Kata Sandi Siswa..." name="password" aria-label="Masukkan Kata Sandi Siswa..."
+                                id="edit-user-password" placeholder="Masukkan Kata Sandi Mahasiswa..." name="password" aria-label="Masukkan Kata Sandi Mahasiswa..."
                                 value="{{ old('password') }}" />
-                            <label for="edit-user-password">Kata Sandi Siswa</label>
+                            <label for="edit-user-password">Kata Sandi Mahasiswa</label>
 
                             @error('password')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -111,9 +111,9 @@
                                 class="form-control @error('password_confirmation')
                                 is-invalid
                             @enderror"
-                                id="edit-user-password_confirmation" placeholder="Masukkan Konfirmasi Kata Sandi Siswa..." name="password_confirmation" aria-label="Masukkan Konfirmasi Kata Sandi Siswa..."
+                                id="edit-user-password_confirmation" placeholder="Masukkan Konfirmasi Kata Sandi Mahasiswa..." name="password_confirmation" aria-label="Masukkan Konfirmasi Kata Sandi Mahasiswa..."
                                 value="{{ old('password_confirmation') }}" />
-                            <label for="edit-user-password_confirmation">Konfirmasi Kata Sandi Siswa</label>
+                            <label for="edit-user-password_confirmation">Konfirmasi Kata Sandi Mahasiswa</label>
 
                             @error('password_confirmation')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>

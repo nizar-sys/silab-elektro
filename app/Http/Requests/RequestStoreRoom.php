@@ -24,7 +24,12 @@ class RequestStoreRoom extends FormRequest
         $rules = [
             'code' => 'required|string|unique:rooms,code,' . $this->room,
             'name' => 'required|string|max:255',
+            'link_stream' => 'required|url',
         ];
+
+        if ($this->isMethod('POST')) {
+            $rules['foto'] = 'required';
+        }
 
         return $rules;
     }
@@ -34,6 +39,8 @@ class RequestStoreRoom extends FormRequest
         return [
             'code' => 'Kode ruangan',
             'name' => 'Nama ruangan',
+            'link_stream' => 'Link streaming',
+            'foto' => 'Foto ruangan',
         ];
     }
 }

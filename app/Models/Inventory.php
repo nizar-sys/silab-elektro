@@ -22,4 +22,9 @@ class Inventory extends Model
     {
         return $this->belongsTo(Room::class);
     }
+
+    public function borrows()
+    {
+        return $this->hasMany(Borrow::class);
+    }
 }
