@@ -52,15 +52,11 @@
                             <a href="#">Seputar Lab</a>
                             <i class="bx bxs-chevron-down htmlcss-arrow arrow"></i>
                             <ul class="htmlCss-sub-menu sub-menu">
-                                <li><a href="#">Inventaris</a></li>
-                                <li>
-                                    <a href="#">Jadwal Penggunaan Lab</a>
-                                </li>
-                                <li><a href="#">Mentoring</a></li>
-                                <li>
-                                    <a href="#">Peminjaman Penelitian</a>
-                                </li>
-                                <li><a href="#">Topik TA</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#inventaris">Inventaris</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#jadwal-lab">Jadwal Penggunaan Lab</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#mentoring">Mentoring</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#peminjaman-penelitian">Peminjaman Penelitian</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#topik-ta">Topik TA</a></li>
                             </ul>
                         </li>
                         <li>

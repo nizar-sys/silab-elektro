@@ -37,6 +37,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::prefix('data')->name('data.')->group(function(){
+    Route::get('/inventories', [HomeController::class, 'getInventoriesData'])->name('inventories');
+    Route::get('/practicals', [HomeController::class, 'getPracticalsData'])->name('practicals');
+
+    Route::get('/mentorings', [HomeController::class, 'getMentoringsData'])->name('mentorings');
+});
+
 require __DIR__ . '/auth.php';
 
 Route::prefix('console')->middleware(['auth', 'verified'])->group(function () {

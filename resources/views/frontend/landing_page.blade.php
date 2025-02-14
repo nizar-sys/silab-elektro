@@ -1,6 +1,16 @@
 @extends('frontend.main')
 @section('title', 'Beranda')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('/materialize') }}/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css" />
+    <link rel="stylesheet"
+        href="{{ asset('/materialize') }}/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css" />
+    <link rel="stylesheet"
+        href="{{ asset('/materialize') }}/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" />
+    <link rel="stylesheet"
+        href="{{ asset('/materialize') }}/assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css" />
+@endpush
+
 @section('content')
     <section class="hero-slider hero-style">
         <div class="swiper-container">
@@ -204,8 +214,7 @@
                     <div class="single-service">
                         <img src="{{ asset($room->foto) }}" alt="{{ $room->name }}" data-toggle="modal"
                             data-target="#videoModal" class="img-fluid video-thumbnail"
-                            data-video="{{ $room->link_stream }}"
-                            data-name="{{ $room->name }}">
+                            data-video="{{ $room->link_stream }}" data-name="{{ $room->name }}">
                     </div>
                 @endforeach
             </div>
@@ -382,9 +391,91 @@
             </div>
         </div>
     </section>
+
+    <div class="modal fade" id="inventaris" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Inventaris</h5>
+                    <button type="button" class="btn btn-transparent btn-close" data-dismiss="modal"
+                        aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        {!! $inventoryDataTable->html()->table() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="jadwal-lab" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Jadwal Penggunaan Lab</h5>
+                    <button type="button" class="btn btn-transparent btn-close" data-dismiss="modal"
+                        aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        {!! $practicalDataTable->html()->table() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="mentoring" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Mentoring</h5>
+                    <button type="button" class="btn btn-transparent btn-close" data-dismiss="modal"
+                        aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        {!! $mentoringDataTable->html()->table() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="peminjaman-penelitian" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Peminjaman Penelitian</h5>
+                    <button type="button" class="btn btn-transparent btn-close" data-dismiss="modal"
+                        aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    Konten untuk Peminjaman Penelitian.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="topik-ta" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Topik TA</h5>
+                    <button type="button" class="btn btn-transparent btn-close" data-dismiss="modal"
+                        aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    Konten untuk Topik TA.
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('scripts')
+    <script src="{{ asset('/materialize') }}/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const thumbnails = document.querySelectorAll('.video-thumbnail');
@@ -395,7 +486,8 @@
                     const videoSrc = thumbnail.dataset.video;
                     const videoName = thumbnail.dataset.name;
 
-                    document.getElementById('videoModalLabel').textContent = `Monitoring ${videoName}`;
+                    document.getElementById('videoModalLabel').textContent =
+                        `Monitoring ${videoName}`;
                     modalVideo.src = videoSrc;
                 });
             });
@@ -406,4 +498,8 @@
             });
         });
     </script>
+
+    {!! $inventoryDataTable->html()->scripts() !!}
+    {!! $practicalDataTable->html()->scripts() !!}
+    {!! $mentoringDataTable->html()->scripts() !!}
 @endpush

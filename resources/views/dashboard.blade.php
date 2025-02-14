@@ -16,10 +16,6 @@
                             <h4 class="mb-0">42</h4>
                         </div>
                         <h6 class="mb-0 fw-normal">On route vehicles</h6>
-                        <p class="mb-0">
-                            <span class="me-1 fw-medium">+18.2%</span>
-                            <small class="text-muted">than last week</small>
-                        </p>
                     </div>
                 </div>
             </div>
@@ -34,10 +30,6 @@
                             <h4 class="mb-0">8</h4>
                         </div>
                         <h6 class="mb-0 fw-normal">Vehicles with errors</h6>
-                        <p class="mb-0">
-                            <span class="me-1 fw-medium">-8.7%</span>
-                            <small class="text-muted">than last week</small>
-                        </p>
                     </div>
                 </div>
             </div>
@@ -52,10 +44,6 @@
                             <h4 class="mb-0">27</h4>
                         </div>
                         <h6 class="mb-0 fw-normal">Deviated from route</h6>
-                        <p class="mb-0">
-                            <span class="me-1 fw-medium">+4.3%</span>
-                            <small class="text-muted">than last week</small>
-                        </p>
                     </div>
                 </div>
             </div>
@@ -70,10 +58,6 @@
                             <h4 class="mb-0">13</h4>
                         </div>
                         <h6 class="mb-0 fw-normal">Late vehicles</h6>
-                        <p class="mb-0">
-                            <span class="me-1 fw-medium">-2.5%</span>
-                            <small class="text-muted">than last week</small>
-                        </p>
                     </div>
                 </div>
             </div>
