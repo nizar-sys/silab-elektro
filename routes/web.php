@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Console\AttendanceController;
 use App\Http\Controllers\Console\BorrowController;
 use App\Http\Controllers\Console\InventoryController;
 use App\Http\Controllers\Console\PermissionController;
 use App\Http\Controllers\Console\PracticalController;
+use App\Http\Controllers\Console\PracticalItemController;
 use App\Http\Controllers\Console\PracticalValueController;
 use App\Http\Controllers\Console\RoleController;
 use App\Http\Controllers\Console\RoomController;
@@ -40,8 +42,16 @@ Route::middleware('auth')->group(function () {
 Route::prefix('data')->name('data.')->group(function(){
     Route::get('/inventories', [HomeController::class, 'getInventoriesData'])->name('inventories');
     Route::get('/practicals', [HomeController::class, 'getPracticalsData'])->name('practicals');
+    Route::get('/modules', [HomeController::class, 'getModulesData'])->name('modules');
+    Route::get('/attendances', [HomeController::class, 'getAttendancesData'])->name('attendances');
 
     Route::get('/mentorings', [HomeController::class, 'getMentoringsData'])->name('mentorings');
+    Route::get('/topics', [HomeController::class, 'getTopicsData'])->name('topics');
+
+    Route::get('/borrows', [HomeController::class, 'getBorrowsData'])->name('borrows');
+    Route::get('/practical-values', [HomeController::class, 'getPracticalValuesData'])->name('practical-values');
+    Route::get('/practical-schedules', [HomeController::class, 'getPracticalSchedulesData'])->name('practical-schedules');
+    Route::get('/practical-datas', [HomeController::class, 'getPracticalDatasData'])->name('practical-datas');
 });
 
 require __DIR__ . '/auth.php';
@@ -51,7 +61,7 @@ Route::prefix('console')->middleware(['auth', 'verified'])->group(function () {
     Route::patch('/users/profile/{id}', [UserController::class, 'updateDetail'])->name('users.profile.update');
     Route::resource('users', UserController::class);
 
-    // Route::resource('subjects', SubjectController::class);
+    Route::resource('subjects', SubjectController::class);
     Route::resource('rooms', RoomController::class);
     Route::resource('schedules', ScheduleController::class);
 
@@ -59,7 +69,9 @@ Route::prefix('console')->middleware(['auth', 'verified'])->group(function () {
     Route::resource('students', StudentController::class);
     Route::resource('practicals', PracticalController::class);
 
+    Route::resource('practical-items', PracticalItemController::class);
     Route::resource('practical-values', PracticalValueController::class);
     Route::post('/borrows/action/{borrow}', [BorrowController::class, 'handleAction'])->name('borrows.action.handle');
     Route::resource('borrows', BorrowController::class);
+    Route::resource('attendances', AttendanceController::class);
 });

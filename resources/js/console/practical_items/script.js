@@ -46,14 +46,21 @@ document.addEventListener("DOMContentLoaded", () => {
         name: {
             validators: {
                 notEmpty: {
-                    message: "Nama Modul wajib diisi",
+                    message: "Nama praktikum wajib diisi",
                 },
             },
         },
-        code: {
+        description: {
             validators: {
                 notEmpty: {
-                    message: "Kode Modul wajib diisi",
+                    message: "Deskripsi wajib diisi",
+                },
+            },
+        },
+        logo: {
+            validators: {
+                notEmpty: {
+                    message: "Logo wajib diisi",
                 },
             },
         },

@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\Subject;
+use App\Models\Attendance;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class SubjectDataTable extends DataTable
+class AttendanceDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -23,16 +23,16 @@ class SubjectDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('action', 'console.subjects.action')
+            ->addColumn('action', 'console.attendances.action')
             ->rawColumns(['action']);
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(Subject $model): QueryBuilder
+    public function query(Attendance $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()->with('practical.student.user');
     }
 
     /**
@@ -54,18 +54,18 @@ class SubjectDataTable extends DataTable
         $language = [
             'sLengthMenu' => 'Tampil _MENU_',
             'search' => '',
-            'searchPlaceholder' => 'Cari Modul...',
+            'searchPlaceholder' => 'Cari Absensi...',
             'paginate' => [
                 'next' => '<i class="ri-arrow-right-s-line"></i>',
                 'previous' => '<i class="ri-arrow-left-s-line"></i>'
             ],
-            'info' => 'Menampilkan _START_ ke _END_ dari _TOTAL_ Modul',
+            'info' => 'Menampilkan _START_ ke _END_ dari _TOTAL_ Absensi',
         ];
 
         // Konfigurasi tombol
         $buttons = [
             [
-                'text' => '<i class="ri-add-line me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Tambah Modul</span>',
+                'text' => '<i class="ri-add-line me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Tambah Absensi</span>',
                 'className' => 'add-new btn btn-primary mb-5 mb-md-0 me-3 waves-effect waves-light',
                 'attr' => [
                     'data-bs-toggle' => 'offcanvas',
@@ -80,13 +80,13 @@ class SubjectDataTable extends DataTable
                 'className' => 'btn btn-secondary mb-5 mb-md-0 waves-effect waves-light',
                 'action' => 'function (e, dt, node, config) {
                     dt.ajax.reload();
-                    $("#subjects-table_filter input").val("").keyup();
+                    $("#attendances-table_filter input").val("").keyup();
                 }'
             ]
         ];
 
         return $this->builder()
-            ->setTableId('subjects-table')
+            ->setTableId('attendances-table')
             ->columns($this->getColumns())
             ->parameters([
                 'order' => [[0, 'desc']], // Urutan default
@@ -97,7 +97,7 @@ class SubjectDataTable extends DataTable
                 'autoWidth' => false, // AutoWidth
             ])
             ->ajax([
-                'url'  => route('subjects.index'),
+                'url'  => route('attendances.index'),
                 'type' => 'GET',
             ]);
     }
@@ -109,8 +109,10 @@ class SubjectDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('#')->orderable(false)->searchable(false),
-            Column::make('code')->title('Kode Modul'),
-            Column::make('name')->title('Nama Modul'),
+            Column::make('practical.student.nim')->title('NIM'),
+            Column::make('practical.student.user.name')->title('Nama Mahasiswa'),
+            Column::make('practical.name')->title('Judul Praktikum'),
+            Column::make('status')->title('Status Absensi'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
@@ -125,6 +127,6 @@ class SubjectDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Subject_' . date('YmdHis');
+        return 'Attendance_' . date('YmdHis');
     }
 }

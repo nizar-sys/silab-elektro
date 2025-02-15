@@ -32,12 +32,12 @@ class PracticalController extends Controller
             Practical::create($request->validated());
 
             DB::commit();
-            return redirect()->route('practicals.index')->with('success', 'Penambahan data praktikum berhasil.');
+            return redirect()->route('practicals.index')->with('success', 'Penambahan data jadwal praktikum berhasil.');
         } catch (\Exception $e) {
             DB::rollBack(); // Rollback the transaction
             Log::error($e->getMessage());
 
-            return back()->with('error', 'Gagal menambah data praktikum.');
+            return back()->with('error', 'Gagal menambah data jadwal praktikum.');
         }
     }
 
@@ -56,7 +56,7 @@ class PracticalController extends Controller
             DB::rollBack(); // Rollback the transaction
             Log::error($e->getMessage());
 
-            return back()->with('error', 'data praktikum tidak ditemukan.');
+            return back()->with('error', 'data jadwal praktikum tidak ditemukan.');
         }
     }
 
@@ -68,12 +68,12 @@ class PracticalController extends Controller
             $practical->update($request->validated());
 
             DB::commit();
-            return redirect()->route('practicals.index')->with('success', 'data praktikum berhasil diperbarui.');
+            return redirect()->route('practicals.index')->with('success', 'data jadwal praktikum berhasil diperbarui.');
         } catch (\Exception $e) {
             DB::rollBack(); // Rollback the transaction
             Log::error($e->getMessage());
 
-            return back()->with('error', 'Gagal merubah data praktikum.');
+            return back()->with('error', 'Gagal merubah data jadwal praktikum.');
         }
     }
 
@@ -84,12 +84,12 @@ class PracticalController extends Controller
             Practical::findOrFail($id)->delete();
 
             DB::commit();
-            return redirect()->route('practicals.index')->with('success', 'data praktikum berhasil dihapus.');
+            return redirect()->route('practicals.index')->with('success', 'data jadwal praktikum berhasil dihapus.');
         } catch (\Exception $e) {
             DB::rollBack(); // Rollback the transaction
             Log::error($e->getMessage());
 
-            return back()->with('error', 'Gagal hapus data praktikum.');
+            return back()->with('error', 'Gagal hapus data jadwal praktikum.');
         }
     }
 }

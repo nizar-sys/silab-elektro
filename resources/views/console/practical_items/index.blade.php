@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Data Nilai Praktikum')
+@section('title', 'Data Praktikum')
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -26,35 +26,31 @@
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAddUser"
                 aria-labelledby="offcanvasAddUserLabel">
                 <div class="offcanvas-header border-bottom">
-                    <h5 id="offcanvasAddUserLabel" class="offcanvas-title">Tambah Nilai Praktikum</h5>
+                    <h5 id="offcanvasAddUserLabel" class="offcanvas-title">Tambah Praktikum</h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
 
                 <div class="offcanvas-body mx-0 flex-grow-0 h-100">
                     <form class="add-new-user pt-0" id="addNewUserForm" method="POST" onsubmit="return false"
-                        action="{{ route('practical-values.store') }}">
+                        action="{{ route('practical-items.store') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-floating form-floating-outline mb-5">
-                            <select id="practical-id" class="form-select @error('practical_id')
-                                is-invalid @enderror" name="practical_id">
-                                <option value="">Pilih Praktikum</option>
-                                @foreach ($practicals as $practical)
-                                    <option value="{{ $practical->id }}">{{ $practical->student->nim }} {{ $practical->student->user->name }} - {{ $practical->name }}</option>
-                                @endforeach
-                            </select>
-                            <label for="practical-id">Praktikum</label>
-
-                            @error('practical_id')
-                                <div class="invalid-feedback d-block">{{ $message }}</div>
-                            @enderror
+                            <input type="file" accept="image/jpg,image/png,image/jpeg,image/gif,image/webp" class="form-control" id="add-logo" name="logo" aria-label="Masukkan Logo Praktikum..." />
+                            <label for="add-logo">Logo</label>
                         </div>
 
                         <div class="form-floating form-floating-outline mb-5">
-                            <input type="text" class="form-control" id="add-value" placeholder="Masukkan Nilai Praktikum..."
-                                name="value" aria-label="Masukkan Nilai Praktikum..." />
-                            <label for="add-value">Nilai</label>
+                            <input type="text" class="form-control" id="add-name" placeholder="Masukkan Nama Praktikum..."
+                                name="name" aria-label="Masukkan Nama Praktikum..." />
+                            <label for="add-name">Nama</label>
+                        </div>
+
+                        <div class="form-floating form-floating-outline mb-5">
+                            <input type="text" class="form-control" id="add-description" placeholder="Masukkan Deskripsi Praktikum..."
+                                name="description" aria-label="Masukkan Deskripsi Praktikum..." />
+                            <label for="add-description">Deskripsi</label>
                         </div>
 
                         <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Simpan</button>
@@ -71,7 +67,7 @@
     {{ $dataTable->scripts() }}
 
     <script>
-        var urlDeleteUser = "{{ route('practical-values.destroy', ':id') }}";
+        var urlDeleteUser = "{{ route('practical-items.destroy', ':id') }}";
     </script>
-    @vite('resources/js/console/practical_values/script.js')
+    @vite('resources/js/console/practical_items/script.js')
 @endpush

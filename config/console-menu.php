@@ -34,13 +34,13 @@ $menuItems = [
     [
         'header' => 'Master Data',
         'items' => [
-            // [
-            //     'title' => 'Mata Kuliah',
-            //     'icon' => 'ri-book-2-line',
-            //     'route' => 'subjects.index',
-            //     'active' => 'subjects.*',
-            //     'submenu' => []
-            // ],
+            [
+                'title' => 'Modul & Jobsheet',
+                'icon' => 'ri-book-2-line',
+                'route' => 'subjects.index',
+                'active' => 'subjects.*',
+                'submenu' => []
+            ],
             [
                 'title' => 'Mahasiswa',
                 'icon' => 'ri-user-3-line',
@@ -80,6 +80,13 @@ $menuItems = [
         'header' => 'Manajemen Praktikum',
         'items' => [
             [
+                'title' => 'Data Praktikum',
+                'icon' => 'ri-book-3-line',
+                'route' => 'practical-items.index',
+                'active' => 'practical-items.*',
+                'submenu' => [],
+            ],
+            [
                 'title' => 'Data Jadwal',
                 'icon' => 'ri-calendar-todo-line',
                 'route' => 'schedules.index',
@@ -87,10 +94,17 @@ $menuItems = [
                 'submenu' => [],
             ],
             [
-                'title' => 'Data Praktikum',
+                'title' => 'Data Jadwal Praktikum',
                 'icon' => 'ri-book-3-line',
                 'route' => 'practicals.index',
                 'active' => 'practicals.*',
+                'submenu' => [],
+            ],
+            [
+                'title' => 'Data Absensi',
+                'icon' => 'ri-file-list-3-line',
+                'route' => 'attendances.index',
+                'active' => 'attendances.*',
                 'submenu' => [],
             ],
             [

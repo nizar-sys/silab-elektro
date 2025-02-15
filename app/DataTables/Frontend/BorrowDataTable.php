@@ -1,8 +1,8 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Frontend;
 
-use App\Models\Subject;
+use App\Models\Borrow;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class SubjectDataTable extends DataTable
+class BorrowDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -23,16 +23,41 @@ class SubjectDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('action', 'console.subjects.action')
-            ->rawColumns(['action']);
+            ->editColumn('status', function ($borrow) {
+                switch ($borrow->status) {
+                    case 'pending':
+                        return '<span class="badge bg-warning">Pending</span>';
+                        break;
+                    case 'borrowed':
+                        return '<span class="badge bg-success">Disetujui</span>';
+                        break;
+                    case 'rejected':
+                        return '<span class="badge bg-danger">Ditolak</span>';
+                        break;
+                    case 'returned':
+                        return '<span class="badge bg-info">Dikembalikan</span>';
+                        break;
+                    default:
+                        return '<span class="badge bg-secondary">Tidak diketahui</span>';
+                        break;
+                }
+            })
+            ->editColumn('returned_date', function ($borrow) {
+                if (!$borrow->returned_date) {
+                    return 'Belum dikembalikan';
+                }
+
+                return $borrow->returned_date;
+            })
+            ->rawColumns(['status']);
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(Subject $model): QueryBuilder
+    public function query(Borrow $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()->with('inventory', 'student.user');
     }
 
     /**
@@ -54,50 +79,39 @@ class SubjectDataTable extends DataTable
         $language = [
             'sLengthMenu' => 'Tampil _MENU_',
             'search' => '',
-            'searchPlaceholder' => 'Cari Modul...',
+            'searchPlaceholder' => 'Cari Peminjaman...',
             'paginate' => [
                 'next' => '<i class="ri-arrow-right-s-line"></i>',
                 'previous' => '<i class="ri-arrow-left-s-line"></i>'
             ],
-            'info' => 'Menampilkan _START_ ke _END_ dari _TOTAL_ Modul',
+            'info' => 'Menampilkan _START_ ke _END_ dari _TOTAL_ Peminjaman',
         ];
 
         // Konfigurasi tombol
         $buttons = [
             [
-                'text' => '<i class="ri-add-line me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Tambah Modul</span>',
-                'className' => 'add-new btn btn-primary mb-5 mb-md-0 me-3 waves-effect waves-light',
-                'attr' => [
-                    'data-bs-toggle' => 'offcanvas',
-                    'data-bs-target' => '#offcanvasAddUser'
-                ],
-                'init' => 'function (api, node, config) {
-                    $(node).removeClass("btn-secondary");
-                }'
-            ],
-            [
                 'text' => '<i class="ri-refresh-line me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Muat ulang</span>',
-                'className' => 'btn btn-secondary mb-5 mb-md-0 waves-effect waves-light',
+                'className' => 'btn btn-sm btn-secondary mb-md-0 waves-effect waves-light',
                 'action' => 'function (e, dt, node, config) {
                     dt.ajax.reload();
-                    $("#subjects-table_filter input").val("").keyup();
+                    $("#inventories-table_filter input").val("").keyup();
                 }'
             ]
         ];
 
         return $this->builder()
-            ->setTableId('subjects-table')
+            ->setTableId('borrows-table')
             ->columns($this->getColumns())
             ->parameters([
                 'order' => [[0, 'desc']], // Urutan default
                 'dom' => $dom, // Struktur DOM
                 'language' => $language, // Bahasa
                 'buttons' => $buttons, // Tombol
-                'responsive' => true, // Responsif
+                'responsive' => false, // Responsif
                 'autoWidth' => false, // AutoWidth
             ])
             ->ajax([
-                'url'  => route('subjects.index'),
+                'url'  => route('data.borrows'),
                 'type' => 'GET',
             ]);
     }
@@ -109,14 +123,12 @@ class SubjectDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('#')->orderable(false)->searchable(false),
-            Column::make('code')->title('Kode Modul'),
-            Column::make('name')->title('Nama Modul'),
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center')
-                ->title('Aksi')
+            Column::make('inventory.name')->title('Nama Barang'),
+            Column::make('student.user.name')->title('Peminjam'),
+            Column::make('borrow_date')->title('Tanggal Pinjam'),
+            Column::make('return_date')->title('Tanggal Kembali'),
+            Column::make('returned_date')->title('Tanggal Dikembalikan'),
+            Column::make('status')->title('Status'),
         ];
     }
 
@@ -125,6 +137,6 @@ class SubjectDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Subject_' . date('YmdHis');
+        return 'Borrow_' . date('YmdHis');
     }
 }

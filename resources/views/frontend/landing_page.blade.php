@@ -211,7 +211,7 @@
             </div>
             <div class="d-flex justify-content-center gap-3">
                 @foreach ($rooms as $room)
-                    <div class="single-service">
+                    <div class="single-service" style="cursor: pointer;">
                         <img src="{{ asset($room->foto) }}" alt="{{ $room->name }}" data-toggle="modal"
                             data-target="#videoModal" class="img-fluid video-thumbnail"
                             data-video="{{ $room->link_stream }}" data-name="{{ $room->name }}">
@@ -253,141 +253,27 @@
                 </div>
             </div>
             <div class="row">
-                <!-- Single Service -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="single-service">
-                        <div class="content">
-                            <span class="icon" style="background-color: transparent;">
-                                <img class="img-responsive" src="{{ asset('/fe') }}/images/services/services1.png">
-                            </span>
-                            <h3 class="title">PEMDAS</h3>
-                            <p class="description">Pemrograman Dasar</p>
+                @forelse ($practicalItems as $practicalItem)
+                    <div class="col-md-6 col-lg-4">
+                        <div class="single-service">
+                            <div class="content">
+                                <span class="icon" style="background-color: transparent;">
+                                    <img class="img-responsive" width="80" height="80" src="{{ asset(str_replace('public/', 'storage/', $practicalItem->logo)) }}">
+                                </span>
+                                <h3 class="title">{{$practicalItem->name}}</h3>
+                                <p class="description">{{$practicalItem->description}}</p>
 
+                            </div>
+                            <span class="circle-before"></span>
                         </div>
-                        <span class="circle-before"></span>
                     </div>
-                </div>
-                <!-- / End Single Service -->
-                <!-- Single Service -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="single-service">
-                        <div class="content">
-                            <span class="icon" style="background-color: transparent;">
-                                <img class="img-responsive" src="{{ asset('/fe') }}/images/services/services2.png">
-                            </span>
-                            <h3 class="title">ORKOM</h3>
-                            <p class="description">Organisasi & Arsitektur Komputer</p>
-
+                @empty
+                    <div class="col-md-12">
+                        <div class="alert alert-warning text-center">
+                            Belum ada data praktikum
                         </div>
-                        <span class="circle-before"></span>
                     </div>
-                </div>
-                <!-- / End Single Service -->
-                <!-- Single Service -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="single-service">
-                        <div class="content">
-                            <span class="icon" style="background-color: transparent;">
-                                <img class="img-responsive" src="{{ asset('/fe') }}/images/services/services3.png">
-                            </span>
-                            <h3 class="title">PRC</h3>
-                            <p class="description">Pemrograman Robot Cerdas</p>
-
-                        </div>
-                        <span class="circle-before"></span>
-                    </div>
-                </div>
-                <!-- / End Single Service -->
-                <!-- Single Service -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="single-service">
-                        <div class="content">
-                            <span class="icon" style="background-color: transparent;">
-                                <img class="img-responsive" src="{{ asset('/fe') }}/images/services/services4.png">
-                            </span>
-                            <h3 class="title">JARKOM</h3>
-                            <p class="description">Jaringan Komputer</p>
-
-                        </div>
-                        <span class="circle-before"></span>
-                    </div>
-                </div>
-                <!-- / End Single Service -->
-                <!-- Single Service -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="single-service">
-                        <div class="content">
-                            <span class="icon" style="background-color: transparent;">
-                                <img class="img-responsive" src="{{ asset('/fe') }}/images/services/services5.png">
-                            </span>
-                            <h3 class="title">REKWEB</h3>
-                            <p class="description">Rekayasa Web</p>
-
-                        </div>
-                        <span class="circle-before"></span>
-                    </div>
-                </div>
-                <!-- / End Single Service -->
-                <!-- Single Service -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="single-service">
-                        <div class="content">
-                            <span class="icon" style="background-color: transparent;">
-                                <img class="img-responsive" src="{{ asset('/fe') }}/images/services/services6.png">
-                            </span>
-                            <h3 class="title">JST</h3>
-                            <p class="description">Jaringan Syaraf Tiruan</p>
-
-                        </div>
-                        <span class="circle-before"></span>
-                    </div>
-                </div>
-                <!-- / End Single Service -->
-                <!-- Single Service -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="single-service">
-                        <div class="content">
-                            <span class="icon" style="background-color: transparent;">
-                                <img class="img-responsive" src="{{ asset('/fe') }}/images/services/services7.png">
-                            </span>
-                            <h3 class="title">BASDAT</h3>
-                            <p class="description">Basis Data</p>
-
-                        </div>
-                        <span class="circle-before"></span>
-                    </div>
-                </div>
-                <!-- / End Single Service -->
-                <!-- Single Service -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="single-service">
-                        <div class="content">
-                            <span class="icon" style="background-color: transparent;">
-                                <img class="img-responsive" src="{{ asset('/fe') }}/images/services/services8.png">
-                            </span>
-                            <h3 class="title">PBD</h3>
-                            <p class="description">Pemrograman Basis Data</p>
-
-                        </div>
-                        <span class="circle-before"></span>
-                    </div>
-                </div>
-                <!-- / End Single Service -->
-                <!-- Single Service -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="single-service">
-                        <div class="content">
-                            <span class="icon" style="background-color: transparent;">
-                                <img class="img-responsive" src="{{ asset('/fe') }}/images/services/services9.png">
-                            </span>
-                            <h3 class="title">PBO</h3>
-                            <p class="description">Pemrograman Berorientasi Objek</p>
-
-                        </div>
-                        <span class="circle-before"></span>
-                    </div>
-                </div>
-                <!-- / End Single Service -->
+                @endforelse
             </div>
         </div>
     </section>
@@ -452,7 +338,9 @@
                         aria-label="Close">X</button>
                 </div>
                 <div class="modal-body">
-                    Konten untuk Peminjaman Penelitian.
+                    <div class="table-responsive">
+                        {!! $borrowDataTable->html()->table() !!}
+                    </div>
                 </div>
             </div>
         </div>
@@ -467,7 +355,89 @@
                         aria-label="Close">X</button>
                 </div>
                 <div class="modal-body">
-                    Konten untuk Topik TA.
+                    <div class="table-responsive">
+                        {!! $topicDataTable->html()->table() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="absensi" tabindex="-1" aria-labelledby="absensiLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="absensiLabel">Absensi</h5>
+                    <button type="button" class="btn btn-transparent btn-close" data-dismiss="modal" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        {!! $attendanceDataTable->html()->table() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="daftar-nilai" tabindex="-1" aria-labelledby="daftar-nilaiLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="daftar-nilaiLabel">Daftar Nilai</h5>
+                    <button type="button" class="btn btn-transparent btn-close" data-dismiss="modal" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        {!! $practicalValueDataTable->html()->table() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="jadwal-praktikum" tabindex="-1" aria-labelledby="jadwal-praktikumLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="jadwal-praktikumLabel">Jadwal Praktikum</h5>
+                    <button type="button" class="btn btn-transparent btn-close" data-dismiss="modal" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        {!! $practicalScheduleDataTable->html()->table() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modul-jobsheet" tabindex="-1" aria-labelledby="modul-jobsheetLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modul-jobsheetLabel">Modul & Jobsheet</h5>
+                    <button type="button" class="btn btn-transparent btn-close" data-dismiss="modal" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        {!! $moduleDataTable->html()->table() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="praktikum" tabindex="-1" aria-labelledby="praktikumLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="praktikumLabel">Praktikum</h5>
+                    <button type="button" class="btn btn-transparent btn-close" data-dismiss="modal" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        {!! $practicalDataDataTable->html()->table() !!}
+                    </div>
                 </div>
             </div>
         </div>
@@ -502,4 +472,11 @@
     {!! $inventoryDataTable->html()->scripts() !!}
     {!! $practicalDataTable->html()->scripts() !!}
     {!! $mentoringDataTable->html()->scripts() !!}
+    {!! $borrowDataTable->html()->scripts() !!}
+    {!! $topicDataTable->html()->scripts() !!}
+    {!! $practicalValueDataTable->html()->scripts() !!}
+    {!! $practicalScheduleDataTable->html()->scripts() !!}
+    {!! $practicalDataDataTable->html()->scripts() !!}
+    {!! $moduleDataTable->html()->scripts() !!}
+    {!! $attendanceDataTable->html()->scripts() !!}
 @endpush

@@ -43,17 +43,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Form validation configuration
     validateForm("#addNewUserForm", {
-        name: {
+        practical_id: {
             validators: {
                 notEmpty: {
-                    message: "Nama Modul wajib diisi",
+                    message: "Pilih Praktikum.",
                 },
             },
         },
-        code: {
+        status: {
             validators: {
                 notEmpty: {
-                    message: "Kode Modul wajib diisi",
+                    message: "Status harus diisi.",
                 },
             },
         },

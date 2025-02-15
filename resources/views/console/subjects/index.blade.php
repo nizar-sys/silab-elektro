@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Data Mata Kuliah')
+@section('title', 'Data Modul & Jobsheet')
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -26,7 +26,7 @@
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAddUser"
                 aria-labelledby="offcanvasAddUserLabel">
                 <div class="offcanvas-header border-bottom">
-                    <h5 id="offcanvasAddUserLabel" class="offcanvas-title">Tambah Mata Kuliah</h5>
+                    <h5 id="offcanvasAddUserLabel" class="offcanvas-title">Tambah Modul & Jobsheet</h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
@@ -37,21 +37,15 @@
                         @csrf
 
                         <div class="form-floating form-floating-outline mb-5">
-                            <input type="text" class="form-control" id="add-code" placeholder="Masukkan Kode Mata Kuliah..."
-                                name="code" aria-label="Masukkan Kode Mata Kuliah..." />
+                            <input type="text" class="form-control" id="add-code" placeholder="Masukkan Kode Modul & Jobsheet..."
+                                name="code" aria-label="Masukkan Kode Modul & Jobsheet..." />
                             <label for="add-code">Kode</label>
                         </div>
 
                         <div class="form-floating form-floating-outline mb-5">
-                            <input type="text" class="form-control" id="add-name" placeholder="Masukkan Nama Mata Kuliah..."
-                                name="name" aria-label="Masukkan Nama Mata Kuliah..." />
+                            <input type="text" class="form-control" id="add-name" placeholder="Masukkan Nama Modul & Jobsheet..."
+                                name="name" aria-label="Masukkan Nama Modul & Jobsheet..." />
                             <label for="add-name">Nama</label>
-                        </div>
-
-                        <div class="form-floating form-floating-outline mb-5">
-                            <input type="number" class="form-control" id="add-sks" placeholder="Masukkan SKS Mata Kuliah..."
-                                name="credit" aria-label="Masukkan SKS Mata Kuliah..." />
-                            <label for="add-sks">SKS</label>
                         </div>
 
                         <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Simpan</button>

@@ -17,27 +17,22 @@ class SubjectSeeder extends Seeder
             [
                 'code' => 'MATH101',
                 'name' => 'Mathematics',
-                'credit' => 3,
             ],
             [
                 'code' => 'PHYS101',
                 'name' => 'Physics',
-                'credit' => 3,
             ],
             [
                 'code' => 'CHEM101',
                 'name' => 'Chemistry',
-                'credit' => 3,
             ],
             [
                 'code' => 'BIO101',
                 'name' => 'Biology',
-                'credit' => 3,
             ],
             [
                 'code' => 'COMP101',
                 'name' => 'Computer Science',
-                'credit' => 3,
             ],
         ];
 

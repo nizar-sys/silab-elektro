@@ -1,8 +1,8 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Frontend;
 
-use App\Models\Subject;
+use App\Models\PracticalItem;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class SubjectDataTable extends DataTable
+class PracticalDataDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -23,14 +23,38 @@ class SubjectDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('action', 'console.subjects.action')
-            ->rawColumns(['action']);
+            ->editColumn('logo', function ($data) {
+                if ($data->logo) {
+                    $imageUrl = str_replace('public/', 'storage/', $data->logo);
+                    return '
+                        <button data-toggle="modal" data-target="#logoModal' . $data->id . '">
+                            <img src="' . asset($imageUrl) . '" style="width:50px; height:50px; object-fit:cover;" alt="Image"/>
+                        </button>
+                        <div class="modal fade" id="logoModal' . $data->id . '" tabindex="-1" aria-labelledby="logoModalLabel' . $data->id . '" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="logoModalLabel' . $data->id . '">' . "Logo" . '</h5>
+                                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        <img src="' . asset($imageUrl) . '" style="width:100%; height:auto; object-fit:cover;" alt="Logo"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ';
+                }
+                return '-';
+            })
+
+            ->rawColumns(['logo']);
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(Subject $model): QueryBuilder
+    public function query(PracticalItem $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -54,39 +78,28 @@ class SubjectDataTable extends DataTable
         $language = [
             'sLengthMenu' => 'Tampil _MENU_',
             'search' => '',
-            'searchPlaceholder' => 'Cari Modul...',
+            'searchPlaceholder' => 'Cari Praktikum...',
             'paginate' => [
                 'next' => '<i class="ri-arrow-right-s-line"></i>',
                 'previous' => '<i class="ri-arrow-left-s-line"></i>'
             ],
-            'info' => 'Menampilkan _START_ ke _END_ dari _TOTAL_ Modul',
+            'info' => 'Menampilkan _START_ ke _END_ dari _TOTAL_ Praktikum',
         ];
 
         // Konfigurasi tombol
         $buttons = [
             [
-                'text' => '<i class="ri-add-line me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Tambah Modul</span>',
-                'className' => 'add-new btn btn-primary mb-5 mb-md-0 me-3 waves-effect waves-light',
-                'attr' => [
-                    'data-bs-toggle' => 'offcanvas',
-                    'data-bs-target' => '#offcanvasAddUser'
-                ],
-                'init' => 'function (api, node, config) {
-                    $(node).removeClass("btn-secondary");
-                }'
-            ],
-            [
                 'text' => '<i class="ri-refresh-line me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Muat ulang</span>',
                 'className' => 'btn btn-secondary mb-5 mb-md-0 waves-effect waves-light',
                 'action' => 'function (e, dt, node, config) {
                     dt.ajax.reload();
-                    $("#subjects-table_filter input").val("").keyup();
+                    $("#practical-datas-table_filter input").val("").keyup();
                 }'
             ]
         ];
 
         return $this->builder()
-            ->setTableId('subjects-table')
+            ->setTableId('practical-datas-table')
             ->columns($this->getColumns())
             ->parameters([
                 'order' => [[0, 'desc']], // Urutan default
@@ -97,7 +110,7 @@ class SubjectDataTable extends DataTable
                 'autoWidth' => false, // AutoWidth
             ])
             ->ajax([
-                'url'  => route('subjects.index'),
+                'url'  => route('data.practical-datas'),
                 'type' => 'GET',
             ]);
     }
@@ -109,14 +122,9 @@ class SubjectDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('#')->orderable(false)->searchable(false),
-            Column::make('code')->title('Kode Modul'),
-            Column::make('name')->title('Nama Modul'),
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center')
-                ->title('Aksi')
+            Column::make('logo')->title('Logo')->width(100),
+            Column::make('name')->title('Nama Praktikum'),
+            Column::make('description')->title('Deskripsi')
         ];
     }
 
@@ -125,6 +133,6 @@ class SubjectDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Subject_' . date('YmdHis');
+        return 'PracticalData_' . date('YmdHis');
     }
 }

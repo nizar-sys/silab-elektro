@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Edit Nilai Praktikum')
+@section('title', 'Edit Absensi Praktikum')
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -7,7 +7,7 @@
 
             <div class="card-header border-bottom">
                 <h5 class="card-title mb-0">
-                    <span class="fw-normal">Edit Nilai Praktikum</span>
+                    <span class="fw-normal">Edit Absensi Praktikum</span>
                 </h5>
             </div>
 
@@ -32,7 +32,7 @@
                     @endif
 
                     <form class="edit-user pt-0" id="editUserForm" method="POST" onsubmit="return false"
-                        action="{{ route('practical-values.update', $practicalValue->id) }}">
+                        action="{{ route('attendances.update', $attendance->id) }}">
                         @csrf
                         @method('PUT')
 
@@ -41,7 +41,7 @@
                                 is-invalid @enderror" name="practical_id">
                                 <option value="">Pilih Praktikum</option>
                                 @foreach ($practicals as $practical)
-                                    <option value="{{ $practical->id }}" @if ($practical->id == $practicalValue->practical_id) selected @endif>{{ $practical->student->nim }} {{ $practical->student->user->name }} - {{ $practical->name }}</option>
+                                    <option value="{{ $practical->id }}" @if ($practical->id == $attendance->practical_id) selected @endif>{{ $practical->student->nim }} {{ $practical->student->user->name }} - {{ $practical->name }}</option>
                                 @endforeach
                             </select>
                             <label for="practical_id-id">Praktikum</label>
@@ -51,18 +51,29 @@
                             @enderror
                         </div>
 
-                        <div class="form-floating form-floating-outline mb-5">
-                            <input type="text" class="form-control @error('value') is-invalid @enderror"
-                                id="add-practicalValue-value" placeholder="Kode Inventaris" name="value" aria-label="Kode Inventaris" value="{{ $practicalValue->value }}"/>
-                            <label for="add-practicalValue-value">Nilai</label>
+                        <div class="mb-5">
+                            <label class="form-label">Status Absensi</label>
 
-                            @error('value')
+                            @php
+                                $statusOptions = ['hadir' => 'Hadir', 'izin' => 'Izin', 'sakit' => 'Sakit', 'alpa' => 'Alpa'];
+                            @endphp
+
+                            @foreach ($statusOptions as $value => $label)
+                                <div class="form-check">
+                                    <input class="form-check-input @error('status') is-invalid @enderror" type="radio"
+                                        name="status" id="status-{{ $value }}" value="{{ $value }}"
+                                        {{ old('status', $attendance->status) == $value ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="status-{{ $value }}">{{ $label }}</label>
+                                </div>
+                            @endforeach
+
+                            @error('status')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror
                         </div>
 
                         <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Simpan</button>
-                        <a href="{{ route('practical-values.index') }}" class="btn btn-outline-secondary">Batal</a>
+                        <a href="{{ route('attendances.index') }}" class="btn btn-outline-secondary">Batal</a>
                     </form>
                 </div>
             </div>
@@ -71,5 +82,5 @@
 @endsection
 
 @push('scripts')
-    @vite('resources/js/console/practical_values/edit_script.js')
+    @vite('resources/js/console/attendances/edit_script.js')
 @endpush

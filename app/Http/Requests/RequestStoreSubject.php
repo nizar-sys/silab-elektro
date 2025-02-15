@@ -24,7 +24,7 @@ class RequestStoreSubject extends FormRequest
         $rules = [
             'code' => 'required|string|unique:subjects,code,' . $this->subject,
             'name' => 'required|string|max:255',
-            'credit' => 'required|numeric',
+            // 'credit' => 'required|numeric',
         ];
 
         return $rules;
@@ -33,9 +33,9 @@ class RequestStoreSubject extends FormRequest
     public function attributes()
     {
         return [
-            'code' => 'Kode mata kuliah',
-            'name' => 'Nama mata kuliah',
-            'credit' => 'Jumlah SKS',
+            'code' => 'Kode modul',
+            'name' => 'Nama modul',
+            // 'credit' => 'Jumlah SKS',
         ];
     }
 }

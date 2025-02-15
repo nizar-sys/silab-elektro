@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Frontend;
 
 use App\Models\Subject;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class SubjectDataTable extends DataTable
+class ModuleDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -22,9 +22,7 @@ class SubjectDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addIndexColumn()
-            ->addColumn('action', 'console.subjects.action')
-            ->rawColumns(['action']);
+            ->addIndexColumn();
     }
 
     /**
@@ -65,17 +63,6 @@ class SubjectDataTable extends DataTable
         // Konfigurasi tombol
         $buttons = [
             [
-                'text' => '<i class="ri-add-line me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Tambah Modul</span>',
-                'className' => 'add-new btn btn-primary mb-5 mb-md-0 me-3 waves-effect waves-light',
-                'attr' => [
-                    'data-bs-toggle' => 'offcanvas',
-                    'data-bs-target' => '#offcanvasAddUser'
-                ],
-                'init' => 'function (api, node, config) {
-                    $(node).removeClass("btn-secondary");
-                }'
-            ],
-            [
                 'text' => '<i class="ri-refresh-line me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Muat ulang</span>',
                 'className' => 'btn btn-secondary mb-5 mb-md-0 waves-effect waves-light',
                 'action' => 'function (e, dt, node, config) {
@@ -97,7 +84,7 @@ class SubjectDataTable extends DataTable
                 'autoWidth' => false, // AutoWidth
             ])
             ->ajax([
-                'url'  => route('subjects.index'),
+                'url'  => route('data.modules'),
                 'type' => 'GET',
             ]);
     }
@@ -111,12 +98,6 @@ class SubjectDataTable extends DataTable
             Column::make('DT_RowIndex')->title('#')->orderable(false)->searchable(false),
             Column::make('code')->title('Kode Modul'),
             Column::make('name')->title('Nama Modul'),
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center')
-                ->title('Aksi')
         ];
     }
 
@@ -125,6 +106,6 @@ class SubjectDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Subject_' . date('YmdHis');
+        return 'Module_' . date('YmdHis');
     }
 }

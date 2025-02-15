@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Edit Praktikum')
+@section('title', 'Edit Jadwal Praktikum')
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -7,7 +7,7 @@
 
             <div class="card-header border-bottom">
                 <h5 class="card-title mb-0">
-                    <span class="fw-normal">Edit Praktikum</span>
+                    <span class="fw-normal">Edit Jadwal Praktikum</span>
                 </h5>
             </div>
 
@@ -48,7 +48,7 @@
                                         {{ $room->name }}</option>
                                 @endforeach
                             </select>
-                            <label for="user-room">Ruangan Praktikum</label>
+                            <label for="user-room">Ruangan Jadwal Praktikum</label>
 
                             @error('room_id')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -67,7 +67,7 @@
                                         {{ $schedule->day }} - {{ $schedule->hour }}</option>
                                 @endforeach
                             </select>
-                            <label for="user-schedule">Jadwal Praktikum</label>
+                            <label for="user-schedule">Jadwal Jadwal Praktikum</label>
 
                             @error('schedule_id')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -86,7 +86,7 @@
                                         {{ $student->user->name }} <small>({{ $student->nim }})</small></option>
                                 @endforeach
                             </select>
-                            <label for="user-student">Siswa Praktikum</label>
+                            <label for="user-student">Siswa Jadwal Praktikum</label>
 
                             @error('student_id')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -98,9 +98,9 @@
                                 class="form-control @error('name')
                                 is-invalid
                             @enderror"
-                                placeholder="Nama Praktikum" aria-label="Nama Praktikum" name="name"
+                                placeholder="Nama Jadwal Praktikum" aria-label="Nama Jadwal Praktikum" name="name"
                                 value="{{ old('name', $practical->name) }}" />
-                            <label for="edit-user-name">Nama Praktikum</label>
+                            <label for="edit-user-name">Nama Jadwal Praktikum</label>
 
                             @error('name')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -112,9 +112,9 @@
                                 class="form-control @error('session')
                                 is-invalid
                             @enderror"
-                                placeholder="Sesi Praktikum" aria-label="Sesi Praktikum" name="session"
+                                placeholder="Sesi Jadwal Praktikum" aria-label="Sesi Jadwal Praktikum" name="session"
                                 value="{{ old('session', $practical->session) }}" />
-                            <label for="edit-user-session">Sesi Praktikum</label>
+                            <label for="edit-user-session">Sesi Jadwal Praktikum</label>
 
                             @error('session')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>

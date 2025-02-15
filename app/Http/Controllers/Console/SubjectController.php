@@ -25,12 +25,12 @@ class SubjectController extends Controller
             Subject::create($request->validated());
 
             DB::commit();
-            return redirect()->route('subjects.index')->with('success', 'Penambahan mata kuliah berhasil.');
+            return redirect()->route('subjects.index')->with('success', 'Penambahan modul berhasil.');
         } catch (\Exception $e) {
             DB::rollBack(); // Rollback the transaction
             Log::error($e->getMessage());
 
-            return back()->with('error', 'Gagal menambah mata kuliah.');
+            return back()->with('error', 'Gagal menambah modul.');
         }
     }
 
@@ -46,7 +46,7 @@ class SubjectController extends Controller
             DB::rollBack(); // Rollback the transaction
             Log::error($e->getMessage());
 
-            return back()->with('error', 'Mata kuliah tidak ditemukan.');
+            return back()->with('error', 'modul tidak ditemukan.');
         }
     }
 
@@ -58,12 +58,12 @@ class SubjectController extends Controller
             $subject->update($request->validated());
 
             DB::commit();
-            return redirect()->route('subjects.index')->with('success', 'Mata kuliah berhasil diperbarui.');
+            return redirect()->route('subjects.index')->with('success', 'modul berhasil diperbarui.');
         } catch (\Exception $e) {
             DB::rollBack(); // Rollback the transaction
             Log::error($e->getMessage());
 
-            return back()->with('error', 'Gagal merubah mata kuliah.');
+            return back()->with('error', 'Gagal merubah modul.');
         }
     }
 
@@ -74,12 +74,12 @@ class SubjectController extends Controller
             Subject::findOrFail($id)->delete();
 
             DB::commit();
-            return redirect()->route('subjects.index')->with('success', 'Mata kuliah berhasil dihapus.');
+            return redirect()->route('subjects.index')->with('success', 'modul berhasil dihapus.');
         } catch (\Exception $e) {
             DB::rollBack(); // Rollback the transaction
             Log::error($e->getMessage());
 
-            return back()->with('error', 'Gagal hapus mata kuliah.');
+            return back()->with('error', 'Gagal hapus modul.');
         }
     }
 }

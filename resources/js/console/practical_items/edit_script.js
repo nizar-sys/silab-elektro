@@ -44,17 +44,17 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     validateForm("#editUserForm", {
-        code: {
-            validators: {
-                notEmpty: {
-                    message: "Kode Modul tidak boleh kosong",
-                },
-            },
-        },
         name: {
             validators: {
                 notEmpty: {
-                    message: "Nama Modul tidak boleh kosong",
+                    message: "Nama praktikum wajib diisi",
+                },
+            },
+        },
+        description: {
+            validators: {
+                notEmpty: {
+                    message: "Deskripsi wajib diisi",
                 },
             },
         },

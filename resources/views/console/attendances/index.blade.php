@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Data Nilai Praktikum')
+@section('title', 'Data Absensi Praktikum')
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -26,14 +26,14 @@
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAddUser"
                 aria-labelledby="offcanvasAddUserLabel">
                 <div class="offcanvas-header border-bottom">
-                    <h5 id="offcanvasAddUserLabel" class="offcanvas-title">Tambah Nilai Praktikum</h5>
+                    <h5 id="offcanvasAddUserLabel" class="offcanvas-title">Tambah Absensi Praktikum</h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
 
                 <div class="offcanvas-body mx-0 flex-grow-0 h-100">
                     <form class="add-new-user pt-0" id="addNewUserForm" method="POST" onsubmit="return false"
-                        action="{{ route('practical-values.store') }}">
+                        action="{{ route('attendances.store') }}">
                         @csrf
 
                         <div class="form-floating form-floating-outline mb-5">
@@ -51,10 +51,24 @@
                             @enderror
                         </div>
 
-                        <div class="form-floating form-floating-outline mb-5">
-                            <input type="text" class="form-control" id="add-value" placeholder="Masukkan Nilai Praktikum..."
-                                name="value" aria-label="Masukkan Nilai Praktikum..." />
-                            <label for="add-value">Nilai</label>
+                        <div class="mb-5">
+                            <label class="form-label">Status Absensi</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="status" id="hadir" value="hadir" checked>
+                                <label class="form-check-label" for="hadir">Hadir</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="status" id="izin" value="izin">
+                                <label class="form-check-label" for="izin">Izin</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="status" id="sakit" value="sakit">
+                                <label class="form-check-label" for="sakit">Sakit</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="status" id="alpa" value="alpa">
+                                <label class="form-check-label" for="alpa">Alpa</label>
+                            </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Simpan</button>
@@ -71,7 +85,7 @@
     {{ $dataTable->scripts() }}
 
     <script>
-        var urlDeleteUser = "{{ route('practical-values.destroy', ':id') }}";
+        var urlDeleteUser = "{{ route('attendances.destroy', ':id') }}";
     </script>
-    @vite('resources/js/console/practical_values/script.js')
+    @vite('resources/js/console/attendances/script.js')
 @endpush

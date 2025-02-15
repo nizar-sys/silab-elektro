@@ -44,17 +44,17 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     validateForm("#editUserForm", {
-        code: {
+        practical_id: {
             validators: {
                 notEmpty: {
-                    message: "Kode Modul tidak boleh kosong",
+                    message: "Pilih Praktikum.",
                 },
             },
         },
-        name: {
+        status: {
             validators: {
                 notEmpty: {
-                    message: "Nama Modul tidak boleh kosong",
+                    message: "Status harus diisi.",
                 },
             },
         },

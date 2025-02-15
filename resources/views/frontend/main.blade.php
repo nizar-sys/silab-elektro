@@ -63,11 +63,11 @@
                             <a href="#">Seputar Praktikum</a>
                             <i class="bx bxs-chevron-down js-arrow arrow"></i>
                             <ul class="js-sub-menu sub-menu">
-                                <li><a href="#">Absensi</a></li>
-                                <li><a href="#">Daftar Nilai</a></li>
-                                <li><a href="#">Jadwal Praktikum</a></li>
-                                <li><a href="#">Modul & Jobsheet</a></li>
-                                <li><a href="#">Praktikum</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#absensi">Absensi</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#daftar-nilai">Daftar Nilai</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#jadwal-praktikum">Jadwal Praktikum</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#modul-jobsheet">Modul & Jobsheet</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#praktikum">Praktikum</a></li>
                             </ul>
                         </li>
                         @if (Auth::check())
@@ -121,11 +121,11 @@
                         </li>
                         <li class="list-inline-item">|</li>
                         <li class="list-inline-item">
-                            <a href="#" class="text-white text-decoration-none">Inventaris</a>
+                            <a href="#" data-toggle="modal" data-target="#inventaris" class="text-white text-decoration-none">Inventaris</a>
                         </li>
                         <li class="list-inline-item">|</li>
                         <li class="list-inline-item">
-                            <a href="#" class="text-white text-decoration-none">Absensi</a>
+                            <a href="#" data-toggle="modal" data-target="#absensi" class="text-white text-decoration-none">Absensi</a>
                         </li>
                         <li class="list-inline-item">|</li>
                         <li class="list-inline-item">
