@@ -201,6 +201,44 @@
             <div class="row justify-content-center text-center">
                 <div class="col-md-10 col-lg-8">
                     <div class="header-section">
+                        <h2 class="title">Praktikum</h2>
+                        <p class="description">
+                            Informasi kegiatan Sistem praktikum jurusan pendidikan Teknik Elektro
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @forelse ($practicalItems as $practicalItem)
+                    <div class="col-md-6 col-lg-4">
+                        <div class="single-service">
+                            <div class="content">
+                                <span class="icon" style="background-color: transparent;">
+                                    <img class="img-responsive" width="80" height="80" src="{{ asset(str_replace('public/', 'storage/', $practicalItem->logo)) }}">
+                                </span>
+                                <h3 class="title">{{$practicalItem->name}}</h3>
+                                <p class="description">{{$practicalItem->description}}</p>
+
+                            </div>
+                            <span class="circle-before"></span>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-md-12">
+                        <div class="alert alert-warning text-center">
+                            Belum ada data praktikum
+                        </div>
+                    </div>
+                @endforelse
+            </div>
+        </div>
+    </section>
+
+    <section class="section-services">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-10 col-lg-8">
+                    <div class="header-section">
                         <h2 class="title">Monitoring</h2>
                         <p class="description">
                             Menampilkan secara langsung keadaan ruangan Laboratorium Sistem praktikum jurusan
@@ -236,44 +274,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-services">
-        <div class="container">
-            <div class="row justify-content-center text-center">
-                <div class="col-md-10 col-lg-8">
-                    <div class="header-section">
-                        <h2 class="title">Praktikum</h2>
-                        <p class="description">
-                            Informasi kegiatan Sistem praktikum jurusan pendidikan Teknik Elektro
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                @forelse ($practicalItems as $practicalItem)
-                    <div class="col-md-6 col-lg-4">
-                        <div class="single-service">
-                            <div class="content">
-                                <span class="icon" style="background-color: transparent;">
-                                    <img class="img-responsive" width="80" height="80" src="{{ asset(str_replace('public/', 'storage/', $practicalItem->logo)) }}">
-                                </span>
-                                <h3 class="title">{{$practicalItem->name}}</h3>
-                                <p class="description">{{$practicalItem->description}}</p>
-
-                            </div>
-                            <span class="circle-before"></span>
-                        </div>
-                    </div>
-                @empty
-                    <div class="col-md-12">
-                        <div class="alert alert-warning text-center">
-                            Belum ada data praktikum
-                        </div>
-                    </div>
-                @endforelse
             </div>
         </div>
     </section>
@@ -438,6 +438,62 @@
                     <div class="table-responsive">
                         {!! $practicalDataDataTable->html()->table() !!}
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Pilih Login</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row g-3">
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">Admin</h5>
+                                        <p class="card-text">Login sebagai Admin</p>
+                                        <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">Mahasiswa</h5>
+                                        <p class="card-text">Login sebagai Mahasiswa</p>
+                                        <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">Asisten Lab</h5>
+                                        <p class="card-text">Login sebagai Asisten Lab</p>
+                                        <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">Dosen</h5>
+                                        <p class="card-text">Login sebagai Dosen</p>
+                                        <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>

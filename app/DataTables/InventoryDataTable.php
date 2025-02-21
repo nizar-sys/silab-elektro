@@ -24,7 +24,14 @@ class InventoryDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addIndexColumn()
             ->addColumn('action', 'console.inventories.action')
-            ->rawColumns(['action']);
+            ->addColumn('status', function ($query) {
+                if ($query->quantity > 0) {
+                    return '<span class="badge bg-success">Tersedia</span>';
+                } else {
+                    return '<span class="badge bg-danger">Tidak Tersedia</span>';
+                }
+            })
+            ->rawColumns(['action', 'status']);
     }
 
     /**
@@ -115,6 +122,8 @@ class InventoryDataTable extends DataTable
             Column::make('brand')->title('Merk'),
             Column::make('purchase_date')->title('Tanggal Pembelian'),
             Column::make('description')->title('Deskripsi'),
+            Column::make('quantity')->title('Jumlah'),
+            Column::make('status')->title('Status Ketersediaan'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

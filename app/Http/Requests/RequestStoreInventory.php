@@ -27,7 +27,8 @@ class RequestStoreInventory extends FormRequest
             'name' => 'required|string|max:255',
             'brand' => 'required|string|max:255',
             'purchase_date' => 'required|date',
-            'description' => 'required|string'
+            'description' => 'required|string',
+            'quantity' => 'required|integer|min:1',
         ];
     }
 
@@ -39,7 +40,8 @@ class RequestStoreInventory extends FormRequest
             'name' => 'Nama',
             'brand' => 'Merek',
             'purchase_date' => 'Tanggal Pembelian',
-            'description' => 'Deskripsi'
+            'description' => 'Deskripsi',
+            'quantity' => 'Jumlah',
         ];
     }
 }

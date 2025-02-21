@@ -101,6 +101,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
             },
         },
+        quantity: {
+            validators: {
+                notEmpty: {
+                    message: "Jumlah tidak boleh kosong.",
+                },
+                integer: {
+                    message: "Jumlah harus berupa angka.",
+                },
+            },
+        },
     });
 
     // Function to handle delete record confirmation

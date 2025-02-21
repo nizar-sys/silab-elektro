@@ -15,7 +15,8 @@ class Inventory extends Model
         'name',
         'brand',
         'purchase_date',
-        'description'
+        'description',
+        'quantity',
     ];
 
     public function room()

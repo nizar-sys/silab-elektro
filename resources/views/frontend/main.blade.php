@@ -91,7 +91,7 @@
                                 <a href="#">Login</a>
                                 <i class="bx bxs-chevron-down htmlcss-arrow arrow"></i>
                                 <ul class="htmlCss-sub-menu sub-menu">
-                                    <li><a href="{{ route('login') }}">Login</a></li>
+                                    <li><a href="{{ route('login') }}" data-toggle="modal" data-target="#loginModal">Login</a></li>
                                     <li><a href="{{ route('register') }}">Registrasi</a></li>
                                 </ul>
                             </li>

@@ -70,6 +70,16 @@
                             @enderror
                         </div>
 
+                        <div class="form-floating form-floating-outline mb-5">
+                            <input type="number" class="form-control @error('amount') is-invalid @enderror"
+                                id="add-inventory-amount" placeholder="10" name="amount" aria-label="10" min="1" value="{{ $borrow->amount }}"/>
+                            <label for="add-inventory-amount">Jumlah Pinjam</label>
+
+                            @error('amount')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Simpan</button>
                         <a href="{{ route('borrows.index') }}" class="btn btn-outline-secondary">Batal</a>
                     </form>

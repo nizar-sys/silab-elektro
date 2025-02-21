@@ -24,6 +24,7 @@ class RequestStoreBorrow extends FormRequest
         return [
             'inventory_id' => 'required|exists:inventories,id',
             'student_id' => 'required|exists:students,id',
+            'amount' => 'required|numeric|min:1',
         ];
     }
 
@@ -31,10 +32,11 @@ class RequestStoreBorrow extends FormRequest
     public function attributes(): array
     {
         return [
-            'inventory_id' => 'Inventory',
-            'student_id' => 'Student',
-            'borrow_date' => 'Borrow Date',
-            'return_date' => 'Return Date',
+            'inventory_id' => 'Barang',
+            'student_id' => 'Mahasiswa',
+            'borrow_date' => 'Tanggal Pinjam',
+            'return_date' => 'Tanggal Kembali',
+            'amount' => 'Jumlah Pinjam',
         ];
     }
 }

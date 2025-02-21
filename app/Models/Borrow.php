@@ -16,6 +16,7 @@ class Borrow extends Model
         'return_date',
         'returned_date',
         'status',
+        'amount',
     ];
 
     public function inventory()

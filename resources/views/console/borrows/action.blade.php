@@ -32,9 +32,11 @@
                 </button>
             </form>
         @endif
-        <a href="{{ route('borrows.edit', $id) }}" class="dropdown-item">
-            <i class="ri-edit-box-line me-2"></i><span>Edit</span>
-        </a>
+        @if (in_array($status, ['pending']))
+            <a href="{{ route('borrows.edit', $id) }}" class="dropdown-item">
+                <i class="ri-edit-box-line me-2"></i><span>Edit</span>
+            </a>
+        @endif
         <a href="javascript:;" class="dropdown-item delete-record" data-id="{{ $id }}">
             <i class="ri-delete-bin-7-line me-2"></i><span>Delete</span>
         </a>

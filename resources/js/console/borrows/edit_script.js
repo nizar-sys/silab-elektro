@@ -58,5 +58,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
             },
         },
+        amount: {
+            validators: {
+                notEmpty: {
+                    message: "Jumlah tidak boleh kosong",
+                },
+                integer: {
+                    message: "Jumlah harus berupa angka",
+                },
+            },
+        }
     });
 });

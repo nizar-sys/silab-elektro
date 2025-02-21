@@ -29,7 +29,7 @@ class BorrowDataTable extends DataTable
                         return '<span class="badge bg-warning">Pending</span>';
                         break;
                     case 'borrowed':
-                        return '<span class="badge bg-success">Disetujui</span>';
+                        return '<span class="badge bg-success">Dipinjam</span>';
                         break;
                     case 'rejected':
                         return '<span class="badge bg-danger">Ditolak</span>';
@@ -124,6 +124,7 @@ class BorrowDataTable extends DataTable
         return [
             Column::make('DT_RowIndex')->title('#')->orderable(false)->searchable(false),
             Column::make('inventory.name')->title('Nama Barang'),
+            Column::make('amount')->title('Jumlah Pinjam'),
             Column::make('student.user.name')->title('Peminjam'),
             Column::make('borrow_date')->title('Tanggal Pinjam'),
             Column::make('return_date')->title('Tanggal Kembali'),

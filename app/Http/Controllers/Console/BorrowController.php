@@ -107,6 +107,10 @@ class BorrowController extends Controller
 
         if ($status === 'returned') {
             $payload['returned_date'] = Carbon::now()->format('Y-m-d');
+
+            $inventory = Inventory::findOrFail($borrow->inventory_id);
+            $inventory->increment('quantity', $borrow->amount);
+            $inventory->save();
         }
 
         if ($status === 'rejected') {
@@ -114,8 +118,15 @@ class BorrowController extends Controller
         }
 
         if ($status === 'borrowed') {
+            $inventory = Inventory::findOrFail($borrow->inventory_id);
+            if ($inventory->quantity < $borrow->amount) {
+                return redirect()->back()->with('error', 'Stock barang tidak mencukupi!');
+            }
             $payload['borrow_date'] = Carbon::now()->format('Y-m-d');
             $payload['return_date'] = Carbon::now()->addDays(7)->format('Y-m-d');
+
+            $inventory->decrement('quantity', $borrow->amount);
+            $inventory->save();
         }
 
         $borrow->update($payload);

@@ -103,6 +103,16 @@
                             @enderror
                         </div>
 
+                        <div class="form-floating form-floating-outline mb-5">
+                            <input type="number" class="form-control @error('quantity') is-invalid @enderror"
+                                id="add-inventory-quantity" placeholder="10" name="quantity" aria-label="10" />
+                            <label for="add-inventory-quantity">Jumlah</label>
+
+                            @error('quantity')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Simpan</button>
                         <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="offcanvas">Batal</button>
                     </form>
